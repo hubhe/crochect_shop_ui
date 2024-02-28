@@ -1,18 +1,24 @@
-import React from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import LoginPage from './pages/LoginPage';
-import SignUpPage from './pages/SignUpPage';
-import './styles/styles.css';
+import { Container } from "react-bootstrap";
+import { Route, Routes } from "react-router-dom";
+import { Navbar } from "./components/Navbar";
+import { About } from "./pages/About";
+import LoginPage from "./pages/Login/LoginPage";
+import { Store } from "./pages/Store";
+import { ShoppingCartProvider } from "./context/ShoppingCartContext"
 
-const App: React.FC = () => {
+function App() {
   return (
-    <Router>
-      <Routes>
-      <Route path="/login" element={<LoginPage />} />
-      <Route path="/signup" element={<SignUpPage />} />
-      </Routes>
-    </Router>
+    <ShoppingCartProvider>
+      <Navbar />
+      <Container className="mb-4">
+        <Routes>
+          <Route path="/" element={<LoginPage />} />
+          <Route path="/store" element={<Store />} />
+          <Route path="/about" element={<About />} />
+        </Routes>
+      </Container>
+      </ShoppingCartProvider>
   );
-};
+}
 
 export default App;

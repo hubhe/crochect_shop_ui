@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import { Form, Button, Alert, InputGroup } from 'react-bootstrap';
 import { BsEye, BsEyeSlash } from 'react-icons/bs';
-import { validateEmail, validatePassword } from '../utils/validationUtils';
+import { validateEmail, validatePassword } from '../../utils/validationUtils';
 
 const LoginForm: React.FC = () => {
   const [email, setEmail] = useState('');

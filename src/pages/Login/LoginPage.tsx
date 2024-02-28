@@ -1,9 +1,7 @@
-// LoginPage.tsx
-
 import React from 'react';
 import { Link } from 'react-router-dom';
-import LoginForm from '../components/LoginForm';
-import '../styles/styles.css';
+import LoginForm from './LoginForm';
+import './LoginPage.css';
 
 const LoginPage: React.FC = () => {
   return (
