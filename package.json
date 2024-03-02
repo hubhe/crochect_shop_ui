@@ -1,20 +1,54 @@
 {
-  "name": "crochect_shop_ui",
-  "version": "1.0.0",
-  "main": "src/index.js",
-  "repository": "https://github.com/hubhe/crochect_shop_ui.git",
-  "author": "Yonatan and Adi",
-  "license": "MIT",
+  "name": "crochet-shop-ui",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@mui/icons-material": "^5.15.11",
+    "@mui/material": "^5.15.11",
+    "@testing-library/jest-dom": "^5.17.0",
+    "@testing-library/react": "^13.4.0",
+    "@testing-library/user-event": "^13.5.0",
+    "@types/jest": "^27.5.2",
+    "@types/node": "^16.18.84",
+    "@types/react": "^18.2.60",
+    "@types/react-dom": "^18.2.19",
+    "bootstrap": "^5.3.3",
+    "react": "^18.2.0",
+    "react-bootstrap": "^2.10.1",
+    "react-datepicker": "^6.2.0",
+    "react-dom": "^18.2.0",
+    "react-icons": "^5.0.1",
+    "react-lazy-load-image-component": "^1.6.0",
+    "react-router-dom": "^6.22.1",
+    "react-scripts": "^5.0.1",
+    "typescript": "^4.9.5",
+    "web-vitals": "^2.1.4"
+  },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
+    "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
-  "dependencies": {
-    "react": "^18.0.0",
-    "react-dom": "^18.0.0",
-    "react-scripts": "^5.0.0"
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
   },
-  "devDependencies": {}
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "@types/react-datepicker": "^6.0.1"
+  }
 }
