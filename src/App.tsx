@@ -3,6 +3,7 @@ import { Route, Routes } from "react-router-dom";
 import { Navbar } from "./components/Navbar";
 import { About } from "./pages/About";
 import LoginPage from "./pages/Login/LoginPage";
+import HomePage from "./pages/Home/HomePage";
 import SignUpPage from "./pages/SignUp/SignUpPage";
 import { Store } from "./pages/Store";
 import { ShoppingCartProvider } from "./context/ShoppingCartContext"
@@ -13,7 +14,7 @@ function App() {
       <Navbar />
       <Container className="mb-4">
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<HomePage />} />
           <Route path="/Login" element={<LoginPage />} />
           <Route path="/SignUp" element={<SignUpPage />} />
           <Route path="/store" element={<Store />} />
