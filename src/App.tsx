@@ -16,9 +16,9 @@ function App() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/Login" element={<LoginPage />} />
-          <Route path="/SignUp" element={<SignUpPage />} />
-          <Route path="/store" element={<Store />} />
-          <Route path="/about" element={<About />} />
+          {/* <Route path="/SignUp" element={<SignUpPage />} /> */}
+          {/* <Route path="/store" element={<Store />} /> */}
+          {/* <Route path="/about" element={<About />} /> */}
         </Routes>
       </Container>
       </ShoppingCartProvider>
