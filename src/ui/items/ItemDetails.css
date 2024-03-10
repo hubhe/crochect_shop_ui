@@ -1,0 +1,25 @@
+.item-details {
+    display: flex;
+    width: 20em;
+    flex-direction: column;
+    margin: 0.5em;
+    padding-bottom: 0.5em;
+    cursor: pointer;
+}
+
+.item-details img {
+    height: 12em;
+    width: 100%;
+    object-fit: cover;
+}
+
+.item-details h3 {
+    margin: 0.1em;
+}
+
+.item-details .details {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
