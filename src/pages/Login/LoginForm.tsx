@@ -1,67 +1,113 @@
-// LoginForm.tsx
+import './LoginForm.css';
 
-import React, { useState } from 'react';
-import { Form, Button, Alert, InputGroup } from 'react-bootstrap';
-import { BsEye, BsEyeSlash } from 'react-icons/bs';
-import { validateEmail, validatePassword } from '../../utils/validationUtils';
+import { FC, useState, useCallback, useEffect, useMemo } from 'react';
+import { Link } from 'react-router-dom';
+import SendIcon from '@mui/icons-material/Send';
+import LoadingButton from '@mui/lab/LoadingButton';
+import { CredentialResponse, GoogleLogin } from '@react-oauth/google'
+import { registerGoogle } from '../../providers/auth/serverAuth';
 
-const LoginForm: React.FC = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [showPassword, setShowPassword] = useState(false);
 
-  const handleLogin = (e: React.FormEvent) => {
-    e.preventDefault();
-    // Handle login logic here
-    console.log('Logging in with:', { email, password });
-  };
+import { TextInput, PasswordInput } from '../../ui';
 
-  const toggleShowPassword = () => {
-    setShowPassword(!showPassword);
-  };
+const MAX_PASSWORD_DIGITS = 8;
 
-  return (
-    <Form onSubmit={handleLogin}>
-      <Form.Group controlId="formBasicEmail">
-        <Form.Label>Email address</Form.Label>
-        <Form.Control
-          type="email"
-          placeholder="Enter email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-          isInvalid={!validateEmail(email) && email !== ''}
-        />
-        {!validateEmail(email) && email !== '' && (
-          <Form.Text className="text-muted">Invalid email format</Form.Text>
-        )}
-      </Form.Group>
+export interface FormProps {
+    type: 'Login' | 'Sign Up';
+    onLogin: (email: string, password: string, name: string) => Promise<void>;
+}
 
-      <Form.Group controlId="formBasicPassword">
-        <Form.Label>Password</Form.Label>
-        <InputGroup>
-          <Form.Control
-            type={showPassword ? 'text' : 'password'}
-            placeholder="Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-            isInvalid={!validatePassword(password) && password !== ''}
-          />
-          <InputGroup.Text onClick={toggleShowPassword} style={{ cursor: 'pointer' }}>
-            {showPassword ? <BsEyeSlash /> : <BsEye />}
-          </InputGroup.Text>
-        </InputGroup>
-        {!validatePassword(password) && password !== '' && (
-          <Form.Text className="text-muted">Password must be at least 8 characters long and contain at least one letter and one number</Form.Text>
-        )}
-      </Form.Group>
+export const LoginForm: FC<FormProps> = ({ type, onLogin }) => {
+    const [name, setName] = useState<string>('');
+    const [email, setEmail] = useState<string>('');
+    const [confirmEmail, setConfirmEmail] = useState<string>('');
+    const [password, setPassword] = useState<string>('');
+    const [confirmPassword, setConfirmPassword] = useState<string>('');
 
-      <Button variant="primary" type="submit">
-        Login
-      </Button>
-    </Form>
-  );
+    const [isValid, setIsValid] = useState<boolean>(false);
+    const [isLoading, setIsLoading] = useState<boolean>(false);
+
+    const isLogin = useMemo(() => type === 'Login', [type]);
+
+    const handleLogin = useCallback(async () => {
+        setIsLoading(true);
+        await onLogin(email, password, name);
+        setIsLoading(false);
+    }, [isLogin, email, password, name]);
+
+    useEffect(() => {
+        if (email.length === 0 || password.length < MAX_PASSWORD_DIGITS) return setIsValid(false);
+        if (type === 'Login') return setIsValid(true);
+
+        if (name.length === 0 || email != confirmEmail || password != confirmPassword)
+            return setIsValid(false);
+        return setIsValid(true);
+    }, [email, password, type, confirmEmail, confirmPassword, name]);
+    const onGoogleLoginSuccess = async (credentialResponse: CredentialResponse) => {
+        console.log(credentialResponse)
+        try {
+            const res = await registerGoogle(credentialResponse)
+            console.log(res)
+        } catch (e) {
+            console.log(e)
+        }
+    }
+
+    const onGoogleLoginFailure = () => {
+        console.log("Google login failed")
+    }
+    return (
+        <div className="login-form">
+            <h2>{isLogin ? 'Welcome Back!' : 'Register'}</h2>
+            <span>continue with google, or enter your details</span>
+            {!isLogin && <TextInput title="Name" value={name} onChange={setName} />}
+            <TextInput title="Email" type="email" value={email} onChange={setEmail} />
+            {!isLogin && (
+                <TextInput
+                    title="Confirm Email"
+                    type="email"
+                    value={confirmEmail}
+                    onChange={setConfirmEmail}
+                />
+            )}
+            <PasswordInput value={password} onChange={setPassword} />
+            {!isLogin && (
+                <PasswordInput
+                    title="Confirm Password"
+                    value={confirmPassword}
+                    onChange={setConfirmPassword}
+                />
+            )}
+
+            {isLogin && (
+                <div>
+                    <span className="forgot-password-btn">Forgot password</span>
+                </div>
+            )}
+            <LoadingButton
+                className="login-btn"
+                onClick={handleLogin}
+                loading={isLoading}
+                loadingPosition="end"
+                variant="contained"
+                disabled={!isValid}
+                endIcon={<SendIcon />}
+            >
+                {type}
+            </LoadingButton>
+
+            <GoogleLogin onSuccess={onGoogleLoginSuccess} onError={onGoogleLoginFailure} />
+            <div>
+                {isLogin ? (
+                    <span>
+                        Don't have an account? <Link to="/sign-up">Sign up</Link>
+                    </span>
+                ) : (
+                    <span>
+                        Already have an account? <Link to="/login">Login</Link>
+                    </span>
+                )}
+            </div>
+        </div>
+    );
 };
-
-export default LoginForm;
