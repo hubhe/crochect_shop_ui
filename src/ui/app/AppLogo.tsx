@@ -18,8 +18,11 @@ export const AppLogo: FC<Props> = ({ hideTitle, small, className, onClick }) => 
             className={classNames('app-logo', className, { small, click: !!onClick })}
             onClick={onClick}
         >
-            <SportsEsportsIcon fontSize={small ? 'medium' : 'large'} />
-            {!hideTitle ? <h2 className="app-logo-title">Crochet Shop</h2> : null}
+            {/* <SportsEsportsIcon fontSize={small ? 'medium' : 'large'} /> */}
+            <a href="/">
+                <img src="/crochetLogo.png" className="logo" />
+            </a>
+            {!hideTitle ? <h2 className="app-logo-title">Crochet Store</h2> : null}
         </div>
     );
 };

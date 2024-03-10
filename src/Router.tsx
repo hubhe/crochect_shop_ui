@@ -9,11 +9,11 @@ import { HomePage } from './pages/homePage/HomePage';
 // import { AdminPage } from './pages/adminPage/AdminPage';
 import { LoginPage, SignUpPage } from './pages/login/LoginPage';
 // import LoginPageTry from './pages/login/LoginPageTry';
-import { PageNotFound } from './pages/PageNotFound';
-import { SearchPage } from './pages/searchPage/SearchPage';
+// import { PageNotFound } from './pages/PageNotFound';
+// import { SearchPage } from './pages/searchPage/SearchPage';
 // import { useAuthContext } from './providers';
-import { Navbar } from './ui';
-import { ItemProfile } from './pages/itemProfile/ItemProfile';
+// import { Navbar } from './ui';
+// import { ItemProfile } from './pages/itemProfile/ItemProfile';
 
 export const Router: FC = () => {
     // const { user, loading } = useAuthContext();
@@ -29,14 +29,14 @@ export const Router: FC = () => {
     return (
         <BrowserRouter>
                     <Routes>
-                        <Route path="/" element={<Navbar />}>
+                        {/* <Route path="/" element={<Navbar />}> */}
                             <Route index element={<HomePage />} />
                             <Route path="genres/:genre" element={<GenrePage />} />
                             <Route path="cart/:id/:idInDB" element={<CartPage />} />
                             <Route path="cart" element={<CartPage />} />
-                            <Route path="search" element={<SearchPage />} />
-                            <Route path="itemProfile/:id" element={<ItemProfile />} />
-                            <Route path="*" element={<PageNotFound />} />
+                            {/* <Route path="search" element={<SearchPage />} /> */}
+                            {/* <Route path="itemProfile/:id" element={<ItemProfile />} /> */}
+                            {/* <Route path="*" element={<PageNotFound />} /> */}
                         </Route>
                         <Route path="/login" element={<LoginPage />} />
                         <Route path="/sign-up" element={<SignUpPage />} />
