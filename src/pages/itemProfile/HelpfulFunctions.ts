@@ -1,4 +1,4 @@
-import { GetCommentFromDB } from '../../../../GamingStore/gaming-store-client/src/providers';
+import { GetCommentFromDB } from '../../providers';
 
 export const AddNewCommentToDB = async (content: string, itemID: number, userID: string) => {
     await fetch(`http://localhost:1234/comment`, {

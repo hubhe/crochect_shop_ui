@@ -50,11 +50,11 @@ const Page: FC<FormProps> = (formProps) => {
     return (
         <div className="login-page">
             <Card className="login-card">
-                <AppLogo className="small-app-logo" small />
+                {/* <AppLogo className="small-app-logo" small /> */}
                 <LoginForm {...formProps} />
                 <div className="right-side">
-                    <img className="login-background-img" src="/login-background.jpeg" />
-                    <AppLogo />
+                    <img className="login-background-img" src="/crochetLogo.png" />
+                    {/* <AppLogo /> */}
                 </div>
             </Card>
         </div>

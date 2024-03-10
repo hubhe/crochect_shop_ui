@@ -12,10 +12,10 @@ import {
     GetItemFromDB,
     getUserFromDB,
     parseToUser,
-} from '../../../../GamingStore/gaming-store-client/src/providers';
-import { useAuthContext } from '../../../../GamingStore/gaming-store-client/src/providers/auth/AuthProvider';
-import { Carousel } from '../../../../GamingStore/gaming-store-client/src/ui';
-import { useFetch } from '../../../../GamingStore/gaming-store-client/src/ui/hooks/useFetch';
+} from '../../providers';
+import { useAuthContext } from '../../providers/auth/AuthProvider';
+import { Carousel } from '../../ui';
+import { useFetch } from '../../ui/hooks/useFetch';
 import Button from '@mui/material/Button';
 import { AddNewCommentToDB, connectCommentToItemAndUser } from './HelpfulFunctions';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
