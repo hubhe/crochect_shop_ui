@@ -1,0 +1,107 @@
+.main-item-screen {
+    display: flex !important;
+    align-items: stretch;
+}
+
+.item-screenshots {
+    flex: 1;
+    padding: 1em;
+}
+
+.item-screenshots .carousel {
+    height: 25em !important;
+}
+
+.genral-item-info {
+    margin: 0 20px;
+}
+
+.add-to-card-btn {
+    background: rgb(1, 54, 54) !important;
+    border: white 1px solid !important;
+    border-radius: 1em !important;
+}
+
+.add-to-card-btn :hover {
+    background: rgb(1, 22, 22) !important;
+}
+
+.bottom-profile {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 3em;
+    padding: 0.5em;
+    align-items: start;
+}
+
+.item-info {
+    margin: 1em;
+}
+
+.item-info h2 {
+    margin: 0.5em;
+}
+
+.item-info img {
+    object-fit: cover;
+    width: 100%;
+    height: 16em;
+}
+
+.buy-item-title {
+    text-align: left;
+    margin-left: 2em;
+}
+
+.buy-item {
+    background-color: #292929;
+}
+
+.buy-item-btn {
+    padding-bottom: 0.5em;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    font-size: 30px;
+    color: #75caec;
+}
+
+.new-comment-content {
+    margin: 1em !important;
+    width: 90%;
+}
+
+.submit-new-comment-btn {
+    margin-top: 1em !important;
+}
+
+.written-comments {
+    background-color: #444444;
+    margin-bottom: 1em;
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.toggle-replays {
+    margin-bottom: 1em !important;
+}
+
+.written-comments-name {
+    top: 0;
+}
+
+.written-comments-content {
+    text-align: center;
+}
+
+.item-comments {
+    background-color: #292929;
+    padding: 1em;
+}
+
+.comments {
+    margin-top: 1em !important;
+    flex: 1 1 0px !important;
+    font-size: 1.5em;
+}
