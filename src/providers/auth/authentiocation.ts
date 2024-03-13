@@ -27,7 +27,7 @@ export async function signUp(email: string, password: string, name: string, imag
     try {
         const userCredential = await serverSignUp(email, password, name, image);
 
-        return userCredential.data.user;
+        return userCredential;
     } catch (error) {
         const authError = error as AuthEventError;
         const errorCode = authError.code;
@@ -46,7 +46,7 @@ export async function login(email: string, password: string): Promise<User> {
     try {
         const userCredential = await serverLogin(email, password);
 
-        return userCredential.data.user;
+        return userCredential;
     } catch (error) {
         const authError = error as AuthEventError;
         const errorCode = authError.code;

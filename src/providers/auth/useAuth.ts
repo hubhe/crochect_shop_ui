@@ -28,7 +28,7 @@ export const useAuth = () => {
 
     const signUp = async (email: string, password: string, name: string, image: string | null) => {
         const user = await authSignUp(email, password, name, image);
-        //await addUserToDB(user.id, user.name ? user.name : '', '');
+        onUserChange(user);
         return user;
     };
 

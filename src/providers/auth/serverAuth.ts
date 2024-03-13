@@ -9,26 +9,19 @@ export interface User {
     imgUrl?: string,
     _id?: string,
     name: string,
-    accessToken?: string,
-    refreshToken?: string
+    accessToken: string,
+    refreshToken: string
 }
 
 interface RegisterRensponse {
-  email: string;
-  _id: string;
-  imgUrl: string;
+  user: User;
   accessToken: string;
   refreshToken: string;
 }
-
-interface Tokens {
-  accessToken: string;
-  refreshToken: string;
-}
-
 interface LoginResponse {
     user: User;
-    tokens: Tokens;
+    accessToken: string;
+    refreshToken: string;
   }
 
   interface AuthResponse {
@@ -38,10 +31,10 @@ interface LoginResponse {
 
 export async function register(email: string, password: string, name: string, image: string | null): Promise<any> {
   try {
-    const response = await axios.post<RegisterRensponse>('http://localhost:3000/auth/register', { email, password, image });
+    const response = await axios.post<RegisterRensponse>('http://localhost:3000/auth/register', { email, password, image, name });
     localStorage.setItem('refreshToken', response.data.refreshToken);
     localStorage.setItem('accessToken', response.data.accessToken);
-    return response;
+    return response.data.user;
   } catch (error) {
     return handleAuthError(error);
   }
@@ -64,10 +57,10 @@ export async function login(email: string, password: string): Promise<any> {
   try {
     const response = await axios.post<LoginResponse>('http://localhost:3000/auth/login', { email, password });
     // Cookies.set('token', token, { expires: 1, secure: true, sameSite: 'strict' });
-    localStorage.setItem('refreshToken', response.data.tokens.refreshToken);
-    localStorage.setItem('accessToken', response.data.tokens.accessToken);
+    localStorage.setItem('refreshToken', response.data.refreshToken);
+    localStorage.setItem('accessToken', response.data.accessToken);
     
-    return response;
+    return response.data.user;
   } catch (error) {
     return handleAuthError(error);
   }
