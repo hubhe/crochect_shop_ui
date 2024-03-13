@@ -6,7 +6,7 @@ import React from 'react';
 
 import { HomePage } from './pages/homePage/HomePage';
 import { AdminPage } from './pages/adminPage/AdminPage';
-import { LoginPage, SignUpPage } from './pages/Login/LoginPage';
+import { LoginPage, SignUpPage } from './pages/login/LoginPage';
 import { PageNotFound } from './pages/PageNotFound';
 import { useAuthContext } from './providers';
 import { Navbar } from './ui';

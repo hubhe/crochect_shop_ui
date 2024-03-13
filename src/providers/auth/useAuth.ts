@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
-import {User} from "./serverAuth"
+import {User, registerGoogle} from "./serverAuth"
+import { CredentialResponse } from '@react-oauth/google'
 import Cookies from 'js-cookie';
 
 import {
@@ -31,21 +32,6 @@ export const useAuth = () => {
         return user;
     };
 
-    // const addUserToDB = async (id: string, name: string, description: string) => {
-    //     await fetch('http://localhost:1234/user', {
-    //         method: 'POST',
-    //         headers: {
-    //             accept: 'application/json',
-    //             'Content-Type': 'application/json',
-    //         },
-    //         body: JSON.stringify({
-    //             userID: id,
-    //             profileName: name,
-    //             profileDescription: description,
-    //         }),
-    //     });
-    // };
-
     const setUserStatus = async (id: string, state: boolean) => {
         await fetch(`http://localhost:1234/user/${id}`, {
             method: 'PUT',
@@ -70,10 +56,17 @@ export const useAuth = () => {
         return user;
     };
 
+    const googleSignUp = async (credentialResponse: CredentialResponse) => {
+        const user = await registerGoogle(credentialResponse);
+        onUserChange(user);
+        return user;
+    }
+
     return {
         user,
         loading,
         signUp,
+        googleSignUp,
         login: loginFunc,
         signOut: signOutFunc,
     };
