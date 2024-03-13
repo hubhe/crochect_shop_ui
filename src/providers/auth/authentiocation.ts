@@ -2,7 +2,7 @@ import {
     register as serverSignUp,
     login as serverLogin,
     signOut as serverSignOut,
-    updateUserImage,
+    updateUserProfile,
 } from './serverAuth';
 
 interface User {
@@ -23,25 +23,28 @@ export function signOut() {
     return serverSignOut();
 }
 
-export async function signUp(email: string, password: string, name: string): Promise<User> {
-    const user = await _userSignInOrUp(email, password, true);
-    //todo: maybe update profile ?
-    return user;
-}
-
-export function updatePicture(token: string, photoURL: string | null): Promise<boolean> {
-    return updateUserImage(photoURL, token);
-}
-
-export function login(email: string, password: string): Promise<User> {
-    return _userSignInOrUp(email, password);
-}
-
-async function _userSignInOrUp(email: string, password: string, newUser = false): Promise<User> {
-    const signInOrUpFunc = newUser ? serverSignUp : serverLogin;
-
+export async function signUp(email: string, password: string, name: string, image: string | null): Promise<User> {
     try {
-        const userCredential = await signInOrUpFunc(email, password);
+        const userCredential = await serverSignUp(email, password, name, image);
+
+        return userCredential.user;
+    } catch (error) {
+        const authError = error as AuthEventError;
+        const errorCode = authError.code;
+        const errorMessage = authError.message;
+
+        throw error;
+    }
+}
+
+export function updateProfile(photoUrl: string | null, name: string | null,
+    email: string | null, password: string | null, token: string): Promise<boolean> {
+    return updateUserProfile(photoUrl, name, email, password, token);
+}
+
+export async function login(email: string, password: string): Promise<User> {
+    try {
+        const userCredential = await serverLogin(email, password);
 
         return userCredential.user;
     } catch (error) {

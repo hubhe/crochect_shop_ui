@@ -8,12 +8,6 @@ export interface BaseItem {
     price: number;
 }
 
-// TODO: add more fields
-export interface Item extends BaseItem {
-    description: string;
-    genres: Array<any>; // later
-}
-
 export interface Genre {
     id: number;
     name: string;

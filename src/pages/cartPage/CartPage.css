@@ -5,6 +5,10 @@
     margin: 1em;
 }
 
+.button {
+    background: rgb(237, 122, 122);
+}
+
 .order-summary-bottom {
     position: absolute;
     bottom: 0px;
@@ -15,6 +19,7 @@
 
 .purchase-btn {
     margin-top: 3em;
+    color: white;
 }
 
 .total-price-container,
@@ -30,6 +35,7 @@
     align-self: self-end;
     margin-bottom: 20px !important;
     margin-right: 20px !important;
+    /* color: rgb(237, 122, 122); */
 }
 
 .item-name {
@@ -85,7 +91,8 @@
     margin-top: 1em;
 }
 
-.cart-information .cart-bottom .back-btn a {
-    /* color: white; */
+.cart-information .cart-bottom .back-btn {
+    color: white;
     text-decoration: none;
+    background: rgb(237, 122, 122);
 }

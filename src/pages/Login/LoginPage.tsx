@@ -12,9 +12,9 @@ import { useNavigate } from 'react-router-dom';
 export const SignUpPage: FC = () => {
     const { signUp } = useAuthContext();
 
-    const onSignUp = useCallback(async (email: string, password: string, name: string) => {
+    const onSignUp = useCallback(async (email: string, password: string, name: string, image: string | null) => {
         try {
-            const user = await signUp?.(email, password, name);
+            const user = await signUp?.(email, password, name, image);
             console.log('🚀 ~ file: loginPage.tsx:36 ~ onLogin ~ user', user);
         } catch (e) {
             console.log('🚀 ~ file: loginPage.tsx:38 ~ onLogin ~ e', e);
