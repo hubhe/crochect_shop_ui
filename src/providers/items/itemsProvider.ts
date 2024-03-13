@@ -65,19 +65,19 @@ export async function getItemAchievements(id: number) {
 }
 
 export async function GetItemFromDB(itemID: number, variable = 'item_id') {
-    const url = `http://localhost:1234/items?${variable}=${itemID}`;
+    const url = `http://localhost:3000/items/${itemID}`;
     const res = await fetchFromUrl(url);
     return res.length !== 0 ? res : [];
 }
 
-export async function GetCommentFromDB(commentID: number, variable = '_id') {
-    const url = `http://localhost:1234/comments?${variable}=${commentID}`;
+export async function GetCommentFromDB(commentID: number, variable = ':id') {
+    const url = `http://localhost:3000/comment/${commentID}`;
     const res = await fetchFromUrl(url);
     return res.length !== 0 ? res : [];
 }
 
 export const getUserFromDB = async (userID: string) => {
-    const url = `http://localhost:1234/users?user_id=${userID}`;
+    const url = `http://localhost:3000/users/${userID}`;
     const res: any = await fetchFromUrl(url);
 
     return res.length !== 0 ? res[0] : undefined;

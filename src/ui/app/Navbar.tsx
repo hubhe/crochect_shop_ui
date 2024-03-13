@@ -31,7 +31,7 @@ export const Navbar = () => {
                             </div>
                         </NavbarMenu>
                     </div>
-                {/* )} */}
+                )}
             </div>
             <Outlet />
         </>

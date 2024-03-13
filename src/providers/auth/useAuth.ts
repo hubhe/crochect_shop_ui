@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-// import { User as FirebaseUser } from 'firebase/auth';
+import {User} from "./serverAuth"
 import Cookies from 'js-cookie';
 
 import {
@@ -9,25 +9,15 @@ import {
 } from './authentiocation';
 import React from 'react';
 
-export interface User {
-    id: string;
-    email: string | null;
-    name: string | null;
-    provider: string;
-    photoUrl: string | null;
-    token: string;
-}
-
 export const useAuth = () => {
     const [user, setUser] = useState<User | null>(null);
     const [loading, setLoading] = useState(true);
 
     const onUserChange = async (rawUser: any | null) => {
         if (rawUser) {
-            const _user = await _formatUser(rawUser);
-            setUser(_user);
+            setUser(rawUser);
             setLoading(false);
-            return _user;
+            return rawUser;
         } else {
             setUser(null);
             setLoading(false);
@@ -71,14 +61,12 @@ export const useAuth = () => {
 
     const signOutFunc = async () => {
         await signOut();
-        await setUserStatus(user?.id ? user.id : '', false);
         onUserChange(null);
     };
 
     const loginFunc = async (email: string, password: string) => {
         const user = await login(email, password);
-        await setUserStatus(user.id, true);
-        // Cookies.set('token', user.token, { expires: 1, secure: true, sameSite: 'strict' });
+        onUserChange(user);
         return user;
     };
 
@@ -88,17 +76,5 @@ export const useAuth = () => {
         signUp,
         login: loginFunc,
         signOut: signOutFunc,
-    };
-};
-
-const _formatUser = async (user: any): Promise<User> => {
-    const token = await user.getIdToken();
-    return {
-        id: user.uid,
-        email: user.email,
-        name: user.displayName,
-        provider: user.providerData[0].providerId,
-        photoUrl: user.photoURL,
-        token,
     };
 };
