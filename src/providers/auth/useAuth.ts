@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-// import { User as FirebaseUser } from 'firebase/auth';
+import {User} from "./serverAuth"
 import Cookies from 'js-cookie';
 
 import {
@@ -9,29 +9,15 @@ import {
 } from './authentiocation';
 import React from 'react';
 
-export interface User {
-    _id: string;
-    email: string;
-    password: string;
-    name: string;
-    imgUrl?: string;
-    isAdmin?: boolean;
-    refreshTokens?: string[];
-    wish_list: [string];
-    in_cart: [string];
-    comments: Array<string>;
-}
-
 export const useAuth = () => {
     const [user, setUser] = useState<User | null>(null);
     const [loading, setLoading] = useState(true);
 
     const onUserChange = async (rawUser: any | null) => {
         if (rawUser) {
-            //const _user = await _formatUser(rawUser);
-            //setUser(_user);
+            setUser(rawUser);
             setLoading(false);
-            //return _user;
+            return rawUser;
         } else {
             setUser(null);
             setLoading(false);
@@ -81,6 +67,7 @@ export const useAuth = () => {
 
     const loginFunc = async (email: string, password: string) => {
         const user = await login(email, password);
+        onUserChange(user);
         return user;
     };
 
@@ -92,12 +79,3 @@ export const useAuth = () => {
         signOut: signOutFunc,
     };
 };
-
-// const _formatUser = async (user: any): Promise<User> => {
-//     const token = await user.getIdToken();
-//     return {
-//         _id: user._id,
-//         email: user.email,
-//         name: user.displayName,
-//     };
-// };

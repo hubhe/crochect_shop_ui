@@ -2,11 +2,12 @@
 import axios, { AxiosError } from 'axios';
 import { CredentialResponse } from '@react-oauth/google'
 
-export interface IUser {
+export interface User {
     email: string,
     password?: string,
     imgUrl?: string,
     _id?: string,
+    name: string,
     accessToken?: string,
     refreshToken?: string
 }
@@ -32,7 +33,7 @@ interface LoginResponse {
 // createUserWithEmailAndPassword
 export async function register(email: string, password: string): Promise<any> {
   try {
-    const response = await axios.post<RegisterRensponse>('http://localhost:3001/auth/register', { email, password });
+    const response = await axios.post<RegisterRensponse>('http://localhost:3000/auth/register', { email, password });
     localStorage.setItem('refreshToken', response.data.refreshToken);
     localStorage.setItem('accessToken', response.data.accessToken);
     return response;
@@ -42,9 +43,9 @@ export async function register(email: string, password: string): Promise<any> {
 }
 
 export async function registerGoogle(credentialResponse: CredentialResponse): Promise<any> {
-    return new Promise<IUser>((resolve, reject) => {
+    return new Promise<User>((resolve, reject) => {
         console.log("googleSignin ...")
-        axios.post("http://localhost:3001/auth/google", credentialResponse).then((response) => {
+        axios.post("http://localhost:3000/auth/google", credentialResponse).then((response) => {
             console.log(response)
             resolve(response.data)
         }).catch((error) => {
@@ -57,7 +58,7 @@ export async function registerGoogle(credentialResponse: CredentialResponse): Pr
 // signInWithEmailAndPassword
 export async function login(email: string, password: string): Promise<any> {
   try {
-    const response = await axios.post<LoginResponse>('http://localhost:3001/auth/login', { email, password });
+    const response = await axios.post<LoginResponse>('http://localhost:3000/auth/login', { email, password });
     // Cookies.set('token', token, { expires: 1, secure: true, sameSite: 'strict' });
     localStorage.setItem('refreshToken', response.data.refreshToken);
     localStorage.setItem('accessToken', response.data.accessToken);
