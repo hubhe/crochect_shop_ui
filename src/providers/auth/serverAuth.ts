@@ -30,10 +30,9 @@ interface LoginResponse {
     token?: string;
   }
 
-// createUserWithEmailAndPassword
-export async function register(email: string, password: string): Promise<any> {
+export async function register(email: string, password: string, name: string, image: string | null): Promise<any> {
   try {
-    const response = await axios.post<RegisterRensponse>('http://localhost:3000/auth/register', { email, password });
+    const response = await axios.post<RegisterRensponse>('http://localhost:3001/auth/register', { email, password, image });
     localStorage.setItem('refreshToken', response.data.refreshToken);
     localStorage.setItem('accessToken', response.data.accessToken);
     return response;
@@ -55,7 +54,6 @@ export async function registerGoogle(credentialResponse: CredentialResponse): Pr
     })
   }
 
-// signInWithEmailAndPassword
 export async function login(email: string, password: string): Promise<any> {
   try {
     const response = await axios.post<LoginResponse>('http://localhost:3000/auth/login', { email, password });
@@ -69,10 +67,14 @@ export async function login(email: string, password: string): Promise<any> {
   }
 }
 
-export async function updateUserImage(photoUrl: string | null, token: string): Promise<boolean> {
+export async function updateUserProfile(photoUrl: string | null, name: string | null,
+   email: string | null, password: string | null, token: string): Promise<boolean> {
     try {
         const body = {
-            photoUrl: photoUrl
+            photoUrl: photoUrl,
+            name: name,
+            email: email,
+            password: password
         };
 
         const headers = {
@@ -80,7 +82,7 @@ export async function updateUserImage(photoUrl: string | null, token: string): P
             'Content-Type': 'application/json'
         };
 
-        const response = await axios.put('http://localhost:3001/updateImage', body, { headers });
+        const response = await axios.put('http://localhost:3001/updateProfile', body, { headers });
 
         const success = response.data.success;
 
@@ -91,7 +93,6 @@ export async function updateUserImage(photoUrl: string | null, token: string): P
     }
 }
 
-// firebaseSignOut
 export async function signOut(): Promise<string> {
     try {
         const token = localStorage.getItem('refreshToken');

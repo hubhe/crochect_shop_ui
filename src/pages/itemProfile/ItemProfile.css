@@ -17,7 +17,8 @@
 }
 
 .add-to-card-btn {
-    background: rgb(1, 54, 54) !important;
+    /* background: rgb(1, 54, 54) !important; */
+    background:#ec75a9;
     border: white 1px solid !important;
     border-radius: 1em !important;
 }
@@ -54,7 +55,7 @@
 }
 
 .buy-item {
-    background-color: #292929;
+    /* background-color: #292929; */
 }
 
 .buy-item-btn {
@@ -63,7 +64,7 @@
     justify-content: space-around;
     align-items: center;
     font-size: 30px;
-    color: #75caec;
+    color: #ec75a9;
 }
 
 .new-comment-content {
@@ -73,10 +74,11 @@
 
 .submit-new-comment-btn {
     margin-top: 1em !important;
+    background: #ec75a9;
 }
 
 .written-comments {
-    background-color: #444444;
+    /* background-color: #444444; */
     margin-bottom: 1em;
     width: 90%;
     margin-left: auto;
@@ -96,7 +98,7 @@
 }
 
 .item-comments {
-    background-color: #292929;
+    background-color: #ffa4db3d;
     padding: 1em;
 }
 

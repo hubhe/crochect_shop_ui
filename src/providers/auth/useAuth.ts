@@ -25,9 +25,9 @@ export const useAuth = () => {
         }
     };
 
-    const signUp = async (email: string, password: string, name: string) => {
-        const user = await authSignUp(email, password, name);
-        //await addUserToDB(user._id, user.name ? user.name : '', '');
+    const signUp = async (email: string, password: string, name: string, image: string | null) => {
+        const user = await authSignUp(email, password, name, image);
+        //await addUserToDB(user.id, user.name ? user.name : '', '');
         return user;
     };
 

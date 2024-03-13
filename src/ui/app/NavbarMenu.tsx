@@ -24,11 +24,8 @@ export const NavbarMenu: FC<PropsWithChildren> = ({ children }) => {
         <>
             <div className="userMenu">
                 <Menu anchorEl={anchorEl} open={open} onClose={() => onClose()}>
-                    <MenuItem onClick={() => onClose()}>
+                    <MenuItem onClick={() => onClose('/profile')}>
                         <span>View Profile</span>
-                    </MenuItem>
-                    <MenuItem onClick={() => onClose('/search')}>
-                        <span>Search Items</span>
                     </MenuItem>
                     <MenuItem onClick={() => onClose('/cart')}>
                         <span>View Cart</span>

@@ -26,11 +26,12 @@ export const Navbar = () => {
                         <NavbarMenu>
                             <div className="user">
                                 <Avatar className="avatar" />
+                                {/* <span>Adi</span> */}
                                 <span>{user.name}</span>
                             </div>
                         </NavbarMenu>
                     </div>
-                )}
+                {/* )} */}
             </div>
             <Outlet />
         </>
