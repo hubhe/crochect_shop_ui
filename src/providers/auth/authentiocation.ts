@@ -42,8 +42,8 @@ async function _userSignInOrUp(email: string, password: string, newUser = false)
 
     try {
         const userCredential = await signInOrUpFunc(email, password);
-
-        return userCredential.user;
+        //Cookies.set('token', user?.refreshToken, { expires: 1, secure: true, sameSite: 'strict' });
+        return userCredential.data.user;
     } catch (error) {
         const authError = error as AuthEventError;
         const errorCode = authError.code;

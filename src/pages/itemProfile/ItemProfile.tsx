@@ -50,15 +50,15 @@ export const ItemProfile: React.FC = () => {
     }, []);
 
     const checkIfItemInLibrary = async () => {
-        const userFromDB: any = await parseToUser(await getUserFromDB(user?.id ? user.id : ''));
+        const userFromDB: any = await parseToUser(await getUserFromDB(user?._id ? user._id : ''));
         const isItemIn = userFromDB?.itemLibrary.some((item: any) => item.item_id == id);
         setIsItemInLibrary(isItemIn);
     };
 
     const addNewComment = async () => {
         if (newComment !== '') {
-            await AddNewCommentToDB(newComment, fullItem?.id, user?.id ? user.id : '');
-            await connectCommentToItemAndUser(fullItem?.id, user?.id ? user.id : '');
+            await AddNewCommentToDB(newComment, fullItem?.id, user?._id ? user._id : '');
+            await connectCommentToItemAndUser(fullItem?.id, user?._id ? user._id : '');
         }
         setNewComment('');
         await refetch();
@@ -72,7 +72,7 @@ export const ItemProfile: React.FC = () => {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                update: { likes: user?.id },
+                update: { likes: user?._id },
                 isArray: true,
             }),
         });
@@ -166,15 +166,15 @@ export const ItemProfile: React.FC = () => {
                                             <div className="written-comments-name">
                                                 By User: {comment?.userName}
                                             </div>
-                                            {comment.userID !== user?.id ? (
+                                            {comment.userID !== user?._id ? (
                                                 <Button
                                                     onClick={() => {
-                                                        if (!comment.likes.includes(user?.id)) {
+                                                        if (!comment.likes.includes(user?._id)) {
                                                             LikingAComment(comment.commentID);
                                                         }
                                                     }}
                                                 >
-                                                    {comment.likes.includes(user?.id) ? (
+                                                    {comment.likes.includes(user?._id) ? (
                                                         <FavoriteIcon />
                                                     ) : (
                                                         <FavoriteBorderIcon />

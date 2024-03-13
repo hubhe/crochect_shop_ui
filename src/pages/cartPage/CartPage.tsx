@@ -18,7 +18,7 @@ export const CartPage: FC = () => {
         isLoading: loadingUserInfo,
         refetch,
     } = useFetch(
-        async () => await parseToUser(await getUserFromDB(user?.id ? user.id : '')),
+        async () => await parseToUser(await getUserFromDB(user?._id ? user._id : '')),
         undefined,
     );
 
@@ -28,7 +28,7 @@ export const CartPage: FC = () => {
 
     const addItemToCart = async () => {
         if (idInDB) {
-            await fetch(`http://localhost:1234/user/${user?.id}`, {
+            await fetch(`http://localhost:1234/user/${user?._id}`, {
                 method: 'PUT',
                 headers: {
                     accept: 'application/json',
@@ -44,7 +44,7 @@ export const CartPage: FC = () => {
     };
 
     const removeAllTheItems = async () => {
-        await fetch(`http://localhost:1234/user/${user?.id}`, {
+        await fetch(`http://localhost:1234/user/${user?._id}`, {
             method: 'PUT',
             headers: {
                 accept: 'application/json',
@@ -74,7 +74,7 @@ export const CartPage: FC = () => {
     };
 
     const removeItemFromCart = async (itemToRemove: any) => {
-        await fetch(`http://localhost:1234/user/${user?.id}`, {
+        await fetch(`http://localhost:1234/user/${user?._id}`, {
             method: 'PUT',
             headers: {
                 accept: 'application/json',
@@ -93,7 +93,7 @@ export const CartPage: FC = () => {
         userInfo?.inCart.forEach((item: any) => {
             items.push(item?.idFromDB);
         });
-        await fetch(`http://localhost:1234/user/${user?.id}`, {
+        await fetch(`http://localhost:1234/user/${user?._id}`, {
             method: 'PUT',
             headers: {
                 accept: 'application/json',

@@ -10,12 +10,16 @@ import {
 import React from 'react';
 
 export interface User {
-    id: string;
-    email: string | null;
-    name: string | null;
-    provider: string;
-    photoUrl: string | null;
-    token: string;
+    _id: string;
+    email: string;
+    password: string;
+    name: string;
+    imgUrl?: string;
+    isAdmin?: boolean;
+    refreshTokens?: string[];
+    wish_list: [string];
+    in_cart: [string];
+    comments: Array<string>;
 }
 
 export const useAuth = () => {
@@ -24,10 +28,10 @@ export const useAuth = () => {
 
     const onUserChange = async (rawUser: any | null) => {
         if (rawUser) {
-            const _user = await _formatUser(rawUser);
-            setUser(_user);
+            //const _user = await _formatUser(rawUser);
+            //setUser(_user);
             setLoading(false);
-            return _user;
+            //return _user;
         } else {
             setUser(null);
             setLoading(false);
@@ -37,7 +41,7 @@ export const useAuth = () => {
 
     const signUp = async (email: string, password: string, name: string) => {
         const user = await authSignUp(email, password, name);
-        //await addUserToDB(user.id, user.name ? user.name : '', '');
+        //await addUserToDB(user._id, user.name ? user.name : '', '');
         return user;
     };
 
@@ -71,14 +75,12 @@ export const useAuth = () => {
 
     const signOutFunc = async () => {
         await signOut();
-        await setUserStatus(user?.id ? user.id : '', false);
+        await setUserStatus(user?._id ? user._id : '', false);
         onUserChange(null);
     };
 
     const loginFunc = async (email: string, password: string) => {
         const user = await login(email, password);
-        await setUserStatus(user.id, true);
-        // Cookies.set('token', user.token, { expires: 1, secure: true, sameSite: 'strict' });
         return user;
     };
 
@@ -91,14 +93,11 @@ export const useAuth = () => {
     };
 };
 
-const _formatUser = async (user: any): Promise<User> => {
-    const token = await user.getIdToken();
-    return {
-        id: user.uid,
-        email: user.email,
-        name: user.displayName,
-        provider: user.providerData[0].providerId,
-        photoUrl: user.photoURL,
-        token,
-    };
-};
+// const _formatUser = async (user: any): Promise<User> => {
+//     const token = await user.getIdToken();
+//     return {
+//         _id: user._id,
+//         email: user.email,
+//         name: user.displayName,
+//     };
+// };
