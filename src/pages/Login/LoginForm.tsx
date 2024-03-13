@@ -12,6 +12,8 @@ const MAX_PASSWORD_DIGITS = 8;
 export interface FormProps {
     type: 'Login' | 'Sign Up';
     onLogin: (email: string, password: string, name: string, imageUrl: string | null) => Promise<void>;
+    onGoogleLoginSuccess?: (response: any) => Promise<void>; 
+
 }
 
 export const LoginForm: FC<FormProps> = ({ type, onLogin }) => {

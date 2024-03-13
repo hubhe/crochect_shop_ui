@@ -9,6 +9,7 @@ import { FormProps, LoginForm } from './LoginForm';
 import { useAuthContext } from '../../providers/auth/AuthProvider';
 import { useNavigate } from 'react-router-dom';
 
+
 export const SignUpPage: FC = () => {
     const { signUp } = useAuthContext();
 
@@ -24,8 +25,8 @@ export const SignUpPage: FC = () => {
     return <Page type="Sign Up" onLogin={onSignUp} />;
 };
 
-export const LoginPage: FC = () => {
-    const { login } = useAuthContext();
+const LoginPage: FC = () => {
+    const { login, googleSignUp } = useAuthContext(); // Destructure googleSignUp from useAuthContext
 
     const onLogin = useCallback(async (email: string, password: string) => {
         try {
@@ -34,9 +35,22 @@ export const LoginPage: FC = () => {
         } catch (e) {
             console.log('🚀 ~ file: loginPage.tsx:38 ~ onLogin ~ e', e);
         }
-    }, []);
+    }, [login]); // Include login in the dependencies array
 
-    return <Page type="Login" onLogin={onLogin} />;
+    const onGoogleLoginSuccess = useCallback(async (response: any) => {
+        try {
+            const { tokenId } = response; // Get the Google token ID
+            const user = await googleSignUp?.(tokenId); // Call googleSignUp with tokenId
+            console.log('🚀 ~ Google login successful:', user);
+            // Redirect user after successful login (if needed)
+        } catch (error) {
+            console.error('Error logging in with Google:', error);
+        }
+    }, [googleSignUp]); // Include googleSignUp in the dependencies array
+
+    return (
+        <Page type="Login" onLogin={onLogin} onGoogleLoginSuccess={onGoogleLoginSuccess} />
+    );
 };
 
 const Page: FC<FormProps> = (formProps) => {
