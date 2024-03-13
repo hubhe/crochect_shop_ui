@@ -1,53 +1,22 @@
 // ImageInput.tsx
-import { ChangeEvent, useRef, useState } from 'react'
-import axios, { AxiosError } from 'axios';
+import React, { ChangeEvent } from 'react';
+import { uploadPhoto } from './uploadPhoto'; // Import the uploadPhoto function
 
 interface ImageInputProps {
-  onChange: (imageUrl: string | null) => void;
+  onChange: (imageUrl: string | null) => void; // Change the type of onChange prop
 }
-
-interface IUpoloadResponse {
-  url: string;
-}
-export const uploadPhoto = async (photo: File) => {
-  return new Promise<string>((resolve, reject) => {
-      console.log("Uploading photo..." + photo)
-      const formData = new FormData();
-      if (photo) {
-          formData.append("file", photo);
-          axios.post<IUpoloadResponse>('/upload', formData, {
-              headers: {
-                  'Content-Type': 'image/jpeg'
-              }
-          }).then(res => {
-              console.log(res);
-              resolve(res.data.url);
-          }).catch(err => {
-              console.log(err);
-              reject(err);
-          });
-      }
-  });
-}
-
-const [imgSrc, setImgSrc] = useState<File>()
-const imgSelected = (e: ChangeEvent<HTMLInputElement>) => {
-  console.log(e.target.value)
-  if (e.target.files && e.target.files.length > 0) {
-      setImgSrc(e.target.files[0])
-  }
-}
-const url = await uploadPhoto(imgSrc!);
-        console.log("upload returned:" + url);
 
 export const ImageInput: React.FC<ImageInputProps> = ({ onChange }) => {
-  const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
+  const handleFileChange = async (event: ChangeEvent<HTMLInputElement>) => {
     const selectedFile = event.target.files?.[0];
     if (selectedFile) {
-      // Here you can upload the file to a server and obtain the image URL
-      // For demonstration purposes, I'm just simulating the upload process
-      const imageUrl = `https://example.com/uploads/${selectedFile.name}`;
-      onChange(imageUrl);
+      try {
+        const imageUrl = await uploadPhoto(selectedFile); // Upload the file and get the image URL
+        onChange(imageUrl);
+      } catch (error) {
+        console.error('Error uploading photo:', error);
+        onChange(null);
+      }
     } else {
       onChange(null);
     }

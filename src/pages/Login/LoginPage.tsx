@@ -25,7 +25,7 @@ export const SignUpPage: FC = () => {
     return <Page type="Sign Up" onLogin={onSignUp} />;
 };
 
-const LoginPage: FC = () => {
+export const LoginPage: FC = () => {
     const { login, googleSignUp } = useAuthContext(); // Destructure googleSignUp from useAuthContext
 
     const onLogin = useCallback(async (email: string, password: string) => {
