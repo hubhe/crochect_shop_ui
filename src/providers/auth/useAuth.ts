@@ -61,7 +61,6 @@ export const useAuth = () => {
 
     const signOutFunc = async () => {
         await signOut();
-        await setUserStatus(user?._id ? user._id : '', false);
         onUserChange(null);
     };
 

@@ -1,6 +1,7 @@
 
 import axios, { AxiosError } from 'axios';
 import { CredentialResponse } from '@react-oauth/google'
+import { To } from 'react-router';
 
 export interface User {
     email: string,
@@ -20,9 +21,14 @@ interface RegisterRensponse {
   refreshToken: string;
 }
 
+interface Tokens {
+  accessToken: string;
+  refreshToken: string;
+}
+
 interface LoginResponse {
-    accessToken: string;
-    refreshToken: string;
+    user: User;
+    tokens: Tokens;
   }
 
   interface AuthResponse {
@@ -32,7 +38,7 @@ interface LoginResponse {
 
 export async function register(email: string, password: string, name: string, image: string | null): Promise<any> {
   try {
-    const response = await axios.post<RegisterRensponse>('http://localhost:3001/auth/register', { email, password, image });
+    const response = await axios.post<RegisterRensponse>('http://localhost:3000/auth/register', { email, password, image });
     localStorage.setItem('refreshToken', response.data.refreshToken);
     localStorage.setItem('accessToken', response.data.accessToken);
     return response;
@@ -58,8 +64,8 @@ export async function login(email: string, password: string): Promise<any> {
   try {
     const response = await axios.post<LoginResponse>('http://localhost:3000/auth/login', { email, password });
     // Cookies.set('token', token, { expires: 1, secure: true, sameSite: 'strict' });
-    localStorage.setItem('refreshToken', response.data.refreshToken);
-    localStorage.setItem('accessToken', response.data.accessToken);
+    localStorage.setItem('refreshToken', response.data.tokens.refreshToken);
+    localStorage.setItem('accessToken', response.data.tokens.accessToken);
     
     return response;
   } catch (error) {
@@ -82,7 +88,7 @@ export async function updateUserProfile(photoUrl: string | null, name: string | 
             'Content-Type': 'application/json'
         };
 
-        const response = await axios.put('http://localhost:3001/updateProfile', body, { headers });
+        const response = await axios.put('http://localhost:3000/updateProfile', body, { headers });
 
         const success = response.data.success;
 
@@ -99,7 +105,7 @@ export async function signOut(): Promise<string> {
         const headers = {
             Authorization: `Bearer ${token}`
           };
-          axios.get('http://localhost:3001/auth/logout', { headers })
+          axios.get('http://localhost:3000/auth/logout', { headers })
           .then(response => {
             localStorage.removeItem('refreshToken');
             localStorage.removeItem('accessToken');
