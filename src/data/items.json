@@ -3,60 +3,63 @@
       "id": 1,
       "name": "Rainbow Bunny",
       "price": 30,
+      "comments": [],
       "imgUrl": "/imgs/rosie.jpg"
     },
     {
       "id": 2,
       "name": "Chick",
       "price": 15,
+      "comments": [],
       "imgUrl": "/imgs/chicks.jpg"
     },
     {
       "id": 3,
       "name": "Mini Cow",
       "price": 15,
+      "comments": [],
       "imgUrl": "/imgs/mini-cow.jpg"
     },
     {
       "id": 4,
       "name": "Polar Bear",
       "price": 20,
-      "imgUrl": "/imgs/polar-bear.jpg"
+      "comments": [],
+      "imgUrl": "/imgs/polar-bears.jpg"
     },
     {
       "id": 5,
       "name": "Succulent",
       "price": 20,
+      "comments": [],
       "imgUrl": "/imgs/succulent.jpg"
     },
     {
       "id": 6,
       "name": "Cactus",
       "price": 20,
+      "comments": [],
       "imgUrl": "/imgs/cactus.jpg"
     },
     {
       "id": 7,
       "name": "Perry the Platypus",
       "price": 20,
+      "comments": [],
       "imgUrl": "/imgs/perry.jpg"
     },
     {
       "id": 8,
       "name": "Snake",
       "price": 25,
+      "comments": [],
       "imgUrl": "/imgs/snake.jpg"
     },
     {
       "id": 9,
       "name": "Cat",
       "price": 15,
+      "comments": [],
       "imgUrl": "/imgs/cat.jpg"
-    },
-    {
-      "id": 10,
-      "name": "Axolotl",
-      "price": 15,
-      "imgUrl": "/imgs/axolotl.jpg"
     }
   ]

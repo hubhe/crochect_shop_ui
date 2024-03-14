@@ -40,9 +40,8 @@ export async function getItems(query: ItemQuery = {}) {
 }
 
 export async function getItemById(id: number) {
-    const url = `${API_URL}items/${id}?key=${API_KEY}`;
-    const res = await fetchFromUrl(url);
-    return res ? parseToFullItem(res) : null;
+    return storeItems.find(item => item.id === id);
+
 }
 
 export async function getItemScreemShots(id: number) {

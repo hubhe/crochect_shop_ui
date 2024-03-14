@@ -1,8 +1,8 @@
 export interface BaseItem {
-    // comments: [];
     id: number;
     name: string;
     price: number;
+    comments: [];
     imgUrl: string;
 }
 

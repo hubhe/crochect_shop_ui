@@ -8,7 +8,7 @@ import { BaseItem, Genre, GenreDetails } from './types';
 
 export function parseToBaseItem(item: any): BaseItem {
     return {
-        // comments: item.comments ? item.comments : [],
+        comments: item.comments ? item.comments : [],
         id: item.id,
         imgUrl: item.background_image ? item.background_image : item.imageUrl,
         name: item.name,
@@ -22,8 +22,6 @@ export async function parseComment(comment: any) {
     return {
         commentID: comment._id,
         content: comment.comment,
-        replays: comment.replays,
-        likes: comment.likes,
         userName: user.profile_name,
         userID: comment.user_id,
     };

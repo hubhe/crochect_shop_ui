@@ -14,6 +14,7 @@ export const ItemDetails: FC<Props> = ({
     id,
     imgUrl,
     name,
+    comments,
     price,
 }) => {
     const navigate = useNavigate();

@@ -88,10 +88,11 @@ import { GenericCarousel } from './GenericCarousel';
 
 // Import the storeItems directly
 import storeItems from '../../data/items.json';
+import slides from '../../data/slides.json';
 
 export const HomePage: FC = () => {
     // Remove the usePageination hook and directly use storeItems
-    const topItems = storeItems.slice(0, 10); // Assuming you want top 10 items
+    const topItems = slides; // Assuming you want top 10 items
 
     // You can directly use storeItems for the best sellers as well
     const items = storeItems;
@@ -100,34 +101,27 @@ export const HomePage: FC = () => {
         // Handle item click logic here
     };
 
-    const loadMore = () => {
-        console.log("Load more items");
-        // Handle load more logic here
+    const handleScroll = () => {
+        console.log('Scrolled');
+        // Add scroll logic here
     };
 
-
     return (
-        <div className="home-page">
-            <Carousel
-                className="top-items-carousel"
-                title="Shop Plushies"
-                items={topItems}
-                autoSlide
-            />
-            {/* Assuming you have a component named GenericCarousel */}
-            <GenericCarousel 
-            type="items"
-            items={items}
-            isLoading={false}
-            onClickItem={onClickItem}
-            // loadMore={loadMore}
-             />
-            {/* <ItemsList
-                title="Best Sellers"
+        <div className="home-page" onScroll={handleScroll}>
+            <div className="home-page">
+                <Carousel
+                    className="top-items-carousel"
+                    title=""
+                    items={topItems}
+                    autoSlide
+                />
+                <GenericCarousel 
+                type="Shop"
                 items={items}
-                isLoading={false} 
-                loadMore={loadMore}
-            /> */}
+                isLoading={false}
+                onClickItem={onClickItem}
+                 />
+            </div>
         </div>
     );
 };
