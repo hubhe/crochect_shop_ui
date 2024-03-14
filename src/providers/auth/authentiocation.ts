@@ -23,9 +23,9 @@ export function signOut() {
     return serverSignOut();
 }
 
-export async function signUp(email: string, password: string, name: string, image: string | null): Promise<User> {
+export async function signUp(formData: FormData): Promise<User> {
     try {
-        const userCredential = await serverSignUp(email, password, name, image);
+        const userCredential = await serverSignUp(formData);
 
         return userCredential.data.user;
     } catch (error) {
@@ -65,3 +65,4 @@ export async function login(email: string, password: string): Promise<User> {
         throw error;
     }
 }
+

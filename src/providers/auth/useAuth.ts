@@ -27,16 +27,23 @@ export const useAuth = () => {
         }
     };
 
-    const signUp = async (email: string, password: string, name: string, image: string | null) => {
-        const user = await authSignUp(email, password, name, image);
+    const signUp = async (formData: FormData) => {
+        const user = await authSignUp(formData);
         onUserChange(user);
         return user;
     };
 
-    const updateProfileFunc = async (id: string | undefined, email: string, password: string, name: string, image: string | null) => {
-        const user = await updateProfile(id, email, password, name, image);
-        onUserChange(user);
-        return user;
+    const setUserStatus = async (id: string, state: boolean) => {
+        await fetch(`http://localhost:1234/user/${id}`, {
+            method: 'PUT',
+            headers: {
+                accept: 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                update: { isOnline: state },
+            }),
+        });
     };
 
     const signOutFunc = async () => {
@@ -51,18 +58,23 @@ export const useAuth = () => {
     };
 
     const googleSignUp = async (credentialResponse: CredentialResponse) => {
-        const response = await registerGoogle(credentialResponse);
-        const user = response.user
+        const user = await registerGoogle(credentialResponse);
         onUserChange(user);
         return user;
     }
+
+    const updateProfileFunc = async (id: string | undefined, email: string, password: string, name: string, image: string | null) => {
+        const user = await updateProfile(id, email, password, name, image);
+        onUserChange(user);
+        return user;
+    };
 
     return {
         user,
         loading,
         signUp,
-        updateProfile: updateProfileFunc,
         googleSignUp,
+        updateProfile: updateProfileFunc,
         login: loginFunc,
         signOut: signOutFunc,
     };

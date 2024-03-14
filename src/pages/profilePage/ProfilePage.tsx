@@ -14,9 +14,13 @@ export const ProfilePage: FC = () => {
     const navigate = useNavigate();
     const { user, updateProfile } = useAuthContext(); // Destructure googleSignUp from useAuthContext
 
-    const onUpdate = useCallback(async (email: string, password: string, name: string, imageUrl: string | null) => {
+    const onUpdate = useCallback(async (formData: FormData) => {
         try {
-            const userToUpdate = await updateProfile?.(user?._id, email, password, name, imageUrl);
+            const email = formData.get("email");
+            const password = formData.get("password");
+            const name = formData.get("name");
+            const imageUrl = formData.get("name");
+            const userToUpdate = await updateProfile?.(user?._id, );
             console.log('🚀 ~ file: loginPage.tsx:36 ~ onLogin ~ user', userToUpdate);
             navigate('/');
         } catch (e) {

@@ -1,5 +1,5 @@
 import './LoginForm.css';
-import React, { FC, useState, useCallback, useEffect, useMemo } from 'react';
+import React, { FC, useState, useCallback, useEffect, useMemo, ChangeEvent } from 'react';
 import { Link } from 'react-router-dom';
 import SendIcon from '@mui/icons-material/Send';
 import LoadingButton from '@mui/lab/LoadingButton';
@@ -12,7 +12,7 @@ const MAX_PASSWORD_DIGITS = 8;
 
 export interface FormProps {
     type: 'Login' | 'Sign Up';
-    onLogin: (email: string, password: string, name: string, imageUrl: string | null) => Promise<void>;
+    onLogin: (formData: FormData) => Promise<void>;
     onGoogleLogin?: (response: any) => Promise<void>; 
 
 }
@@ -23,18 +23,31 @@ export const LoginForm: FC<FormProps> = ({ type, onLogin, onGoogleLogin }) => {
     const [confirmEmail, setConfirmEmail] = useState<string>('');
     const [password, setPassword] = useState<string>('');
     const [confirmPassword, setConfirmPassword] = useState<string>('');
-    const [imageUrl, setImageUrl] = useState<string | null>(null); // State for image URL
+    const [imageInfo, setImageInfo] = useState<File | null>(null); // State for image URL
 
     const [isValid, setIsValid] = useState<boolean>(false);
     const [isLoading, setIsLoading] = useState<boolean>(false);
 
     const isLogin = useMemo(() => type === 'Login', [type]);
 
+    const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
+        if (event.target.files?.[0] !== undefined){
+            setImageInfo(event.target.files[0]);
+        }
+    }
+
     const handleLogin = useCallback(async () => {
         setIsLoading(true);
-        await onLogin(email, password, name, imageUrl); // Pass imageUrl to the onLogin function
+        const formData: FormData = new FormData()
+        formData.append('email', email);
+        formData.append('password', password);
+        formData.append('name', name);
+        if (imageInfo){
+            formData.append('image', imageInfo, imageInfo?.name);
+        }
+        await onLogin(formData); // Pass imageUrl to the onLogin function
         setIsLoading(false);
-    }, [email, password, name, imageUrl]); // Include imageUrl in the dependencies array
+    }, [email, password, name, imageInfo]); // Include imageUrl in the dependencies array
 
     useEffect(() => {
         if (email.length === 0 || password.length < MAX_PASSWORD_DIGITS) return setIsValid(false);
@@ -86,7 +99,17 @@ export const LoginForm: FC<FormProps> = ({ type, onLogin, onGoogleLogin }) => {
                 />
             )}
             {!isLogin && (
-            <ImageInput onChange={setImageUrl} />
+            // <ImageInput onChange={setImageInfo} />
+            <div>
+            <label>
+              Upload Profile Picture:
+              <input
+                type="file"
+                accept="image/jpeg, image/png"
+                onChange={handleFileChange}
+              />
+            </label>
+          </div>
             )}
 
             {isLogin && (

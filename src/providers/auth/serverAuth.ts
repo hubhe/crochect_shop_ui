@@ -14,7 +14,9 @@ export interface User {
 }
 
 interface RegisterRensponse {
-  user: User;
+  email: string;
+  _id: string;
+  imgUrl: string;
   accessToken: string;
   refreshToken: string;
 }
@@ -31,9 +33,9 @@ interface LoginResponse {
     refreshToken: string;
   }
 
-export async function register(email: string, password: string, name: string, image: string | null): Promise<any> {
+export async function register(formData: FormData): Promise<any> {
   try {
-    const response = await axios.post<RegisterRensponse>('http://localhost:3000/auth/register', { email, password, image, name });
+    const response = await axios.post<RegisterRensponse>('http://localhost:3000/auth/register', formData);
     localStorage.setItem('refreshToken', response.data.refreshToken);
     localStorage.setItem('accessToken', response.data.accessToken);
     return response;
@@ -47,8 +49,6 @@ export async function registerGoogle(credentialResponse: CredentialResponse): Pr
         console.log("googleSignin ...")
         axios.post("http://localhost:3000/auth/google", credentialResponse).then((response) => {
             console.log(response)
-            localStorage.setItem('refreshToken', response.data.refreshToken);
-            localStorage.setItem('accessToken', response.data.accessToken);
             resolve(response.data)
         }).catch((error) => {
             console.log(error)
@@ -71,29 +71,29 @@ export async function login(email: string, password: string): Promise<any> {
 }
 
 export async function updateUserProfile(id: string | undefined, name: string | null,
-   email: string | null, password: string | null, photoUrl: string | null): Promise<any> {
-    try {
-        const body = {
-            _id: id,
-            photoUrl: photoUrl,
-            name: name,
-            email: email,
-            password: password
-        };
+  email: string | null, password: string | null, photoUrl: string | null): Promise<any> {
+   try {
+       const body = {
+           _id: id,
+           photoUrl: photoUrl,
+           name: name,
+           email: email,
+           password: password
+       };
 
-        const headers = {
-            'Content-Type': 'application/json'
-        };
+       const headers = {
+           'Content-Type': 'application/json'
+       };
 
-        const response = await axios.put('http://localhost:3000/updateProfile', body, { headers });
+       const response = await axios.put('http://localhost:3000/updateProfile', body, { headers });
 
-        const success = response.data.success;
+       const success = response.data.success;
 
-        return success ? true : false;
-    } catch (error) {
-        // Handle error
-        return false;
-    }
+       return success ? true : false;
+   } catch (error) {
+       // Handle error
+       return false;
+   }
 }
 
 export async function signOut(): Promise<string> {

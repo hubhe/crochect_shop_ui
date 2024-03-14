@@ -25,7 +25,7 @@ export const Navbar = () => {
                     <div className="navbar-end">
                         <NavbarMenu>
                             <div className="user">
-                                <Avatar className="avatar" />
+                                <Avatar className="avatar" src={`http://localhost:3000/public/${user.imgUrl}`} />
                                 {/* <span>Adi</span> */}
                                 <span>{user.name}</span>
                             </div>

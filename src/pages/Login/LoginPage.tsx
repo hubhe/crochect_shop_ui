@@ -15,9 +15,9 @@ export const SignUpPage: FC = () => {
     const { signUp } = useAuthContext();
     const navigate = useNavigate();
 
-    const onSignUp = useCallback(async (email: string, password: string, name: string, image: string | null) => {
+    const onSignUp = useCallback(async (formData: FormData) => {
         try {
-            const user = await signUp?.(email, password, name, image);
+            const user = await signUp?.(formData);
             console.log('🚀 ~ file: loginPage.tsx:36 ~ onLogin ~ user', user);
             navigate('/');
         } catch (e) {
@@ -32,10 +32,14 @@ export const LoginPage: FC = () => {
     const navigate = useNavigate();
     const { login, googleSignUp } = useAuthContext(); // Destructure googleSignUp from useAuthContext
 
-    const onLogin = useCallback(async (email: string, password: string) => {
+    const onLogin = useCallback(async (formData: FormData) => {
         try {
-            const user = await login?.(email, password);
-            console.log('🚀 ~ file: loginPage.tsx:36 ~ onLogin ~ user', user);
+            const email = formData.get("email")
+            const password = formData.get("password")
+            if (email && password){
+                const user = await login?.(email.toString(), password.toString());
+                console.log('🚀 ~ file: loginPage.tsx:36 ~ onLogin ~ user', user);
+            }
             navigate('/');
         } catch (e) {
             console.log('🚀 ~ file: loginPage.tsx:38 ~ onLogin ~ e', e);
@@ -44,7 +48,7 @@ export const LoginPage: FC = () => {
 
     const onGoogleLogin = useCallback(async (response: CredentialResponse) => {
         try {
-            const user = await googleSignUp?.(response); // Call googleSignUp with tokenId
+            const user = await googleSignUp?.(response); 
             console.log('🚀 ~ Google login successful:', user);
             navigate('/');
         } catch (error) {

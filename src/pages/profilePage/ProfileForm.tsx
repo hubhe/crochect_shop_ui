@@ -1,35 +1,47 @@
-import './ProfileForm.css';
-import React, { FC, useState, useCallback, useEffect, useMemo } from 'react';
+import './profilePage.css';
+import React, { FC, useState, useCallback, useEffect, useMemo, ChangeEvent } from 'react';
 import { Link } from 'react-router-dom';
 import SendIcon from '@mui/icons-material/Send';
 import LoadingButton from '@mui/lab/LoadingButton';
+import { CredentialResponse, GoogleLogin } from '@react-oauth/google';
+import { registerGoogle } from '../../providers/auth/serverAuth';
 import { TextInput, PasswordInput, ImageInput } from '../../ui';
-import { useAuthContext } from '../../providers';
 
 
 const MAX_PASSWORD_DIGITS = 8;
 
 export interface FormProps {
     type: 'update';
-    onUpdate: (email: string, password: string, name: string, imageUrl: string | null) => Promise<void>;
+    onUpdate: (formData: FormData) => Promise<void>;
 }
 
 export const ProfileForm: FC<FormProps> = ({ type, onUpdate }) => {
-    const { user } = useAuthContext();
-
     const [name, setName] = useState<string>('');
     const [email, setEmail] = useState<string>('');
     const [password, setPassword] = useState<string>('');
-    const [imageUrl, setImageUrl] = useState<string | null>(null); 
+    const [imageInfo, setImageInfo] = useState<File | null>(null); 
 
     const [isValid, setIsValid] = useState<boolean>(false);
     const [isLoading, setIsLoading] = useState<boolean>(false);
 
+    const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
+        if (event.target.files?.[0] !== undefined){
+            setImageInfo(event.target.files[0]);
+        }
+    }
+
     const handleUpdate = useCallback(async () => {
         setIsLoading(true);
-        await onUpdate(email, password, name, imageUrl); 
+        const formData: FormData = new FormData()
+        formData.append('email', email);
+        formData.append('password', password);
+        formData.append('name', name);
+        if (imageInfo){
+            formData.append('image', imageInfo, imageInfo?.name);
+        }
+        await onUpdate(formData); 
         setIsLoading(false);
-    }, [email, password, name, imageUrl]); 
+    }, [email, password, name, imageInfo]); 
 
     useEffect(() => {
         if (email.length === 0 || password.length < MAX_PASSWORD_DIGITS) return setIsValid(false);
@@ -40,14 +52,23 @@ export const ProfileForm: FC<FormProps> = ({ type, onUpdate }) => {
     }, [email, password, type, name]);
 
     return (
-        <div className="profile-form">
+        <div className="login-form">
             <h2>{'Edit Profile'}</h2>
-            {<TextInput title={user?.name} value={name} onChange={setName} />}
-            <TextInput title={user?.email} type="email" value={email} onChange={setEmail} />
-            <PasswordInput value={user?.password} onChange={setPassword} />
-            <ImageInput onChange={setImageUrl} />
+            <TextInput title="Name" value={name} onChange={setName} />
+            <TextInput title="Email" type="email" value={email} onChange={setEmail} />
+            <PasswordInput value={password} onChange={setPassword} />
+            <div>
+            <label>
+              Change Profile Picture:
+              <input
+                type="file"
+                accept="image/jpeg, image/png"
+                onChange={handleFileChange}
+              />
+            </label>
+          </div>
             <LoadingButton
-                className="profile-btn"
+                className="login-btn"
                 onClick={handleUpdate}
                 loading={isLoading}
                 loadingPosition="end"
@@ -57,10 +78,9 @@ export const ProfileForm: FC<FormProps> = ({ type, onUpdate }) => {
             >
                 {type}
             </LoadingButton>
-
             <div>
                     <span>
-                     <Link to="/">Back to store</Link>
+                         <Link to="/">Go back to store</Link>
                     </span>
             </div>
         </div>
