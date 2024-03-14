@@ -14,9 +14,7 @@ export interface User {
 }
 
 interface RegisterRensponse {
-  email: string;
-  _id: string;
-  imgUrl: string;
+  user: User;
   accessToken: string;
   refreshToken: string;
 }
@@ -35,7 +33,7 @@ interface LoginResponse {
 
 export async function register(email: string, password: string, name: string, image: string | null): Promise<any> {
   try {
-    const response = await axios.post<RegisterRensponse>('http://localhost:3000/auth/register', { email, password, image });
+    const response = await axios.post<RegisterRensponse>('http://localhost:3000/auth/register', { email, password, image, name });
     localStorage.setItem('refreshToken', response.data.refreshToken);
     localStorage.setItem('accessToken', response.data.accessToken);
     return response;
