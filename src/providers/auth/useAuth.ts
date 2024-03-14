@@ -7,6 +7,7 @@ import {
     signUp as authSignUp,
     signOut,
     login,
+    updateProfile
 } from './authentiocation';
 import React from 'react';
 
@@ -32,17 +33,10 @@ export const useAuth = () => {
         return user;
     };
 
-    const setUserStatus = async (id: string, state: boolean) => {
-        await fetch(`http://localhost:1234/user/${id}`, {
-            method: 'PUT',
-            headers: {
-                accept: 'application/json',
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                update: { isOnline: state },
-            }),
-        });
+    const updateProfileFunc = async (id: string | undefined, email: string, password: string, name: string, image: string | null) => {
+        const user = await updateProfile(id, email, password, name, image);
+        onUserChange(user);
+        return user;
     };
 
     const signOutFunc = async () => {
@@ -67,6 +61,7 @@ export const useAuth = () => {
         user,
         loading,
         signUp,
+        updateProfile: updateProfileFunc,
         googleSignUp,
         login: loginFunc,
         signOut: signOutFunc,

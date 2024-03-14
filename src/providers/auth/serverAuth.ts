@@ -70,10 +70,11 @@ export async function login(email: string, password: string): Promise<any> {
   }
 }
 
-export async function updateUserProfile(photoUrl: string | null, name: string | null,
-   email: string | null, password: string | null, token: string): Promise<boolean> {
+export async function updateUserProfile(id: string | undefined, name: string | null,
+   email: string | null, password: string | null, photoUrl: string | null): Promise<any> {
     try {
         const body = {
+            _id: id,
             photoUrl: photoUrl,
             name: name,
             email: email,
@@ -81,7 +82,6 @@ export async function updateUserProfile(photoUrl: string | null, name: string | 
         };
 
         const headers = {
-            Authorization: `Bearer ${token}`,
             'Content-Type': 'application/json'
         };
 

@@ -37,9 +37,19 @@ export async function signUp(email: string, password: string, name: string, imag
     }
 }
 
-export function updateProfile(photoUrl: string | null, name: string | null,
-    email: string | null, password: string | null, token: string): Promise<boolean> {
-    return updateUserProfile(photoUrl, name, email, password, token);
+export async function updateProfile(id: string | undefined, name: string | null,
+    email: string | null, password: string | null, photoUrl: string | null): Promise<User> {
+        try {
+            const userCredential = await updateUserProfile(id, email, password, name, photoUrl);
+    
+            return userCredential.data.user;
+        } catch (error) {
+            const authError = error as AuthEventError;
+            const errorCode = authError.code;
+            const errorMessage = authError.message;
+    
+            throw error;
+        }
 }
 
 export async function login(email: string, password: string): Promise<User> {

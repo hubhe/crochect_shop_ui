@@ -59,16 +59,6 @@ export const LoginForm: FC<FormProps> = ({ type, onLogin, onGoogleLogin }) => {
         }
     }, [onGoogleLogin]);
 
-    // const onGoogleLoginSuccess = async (credentialResponse: CredentialResponse) => {
-    //     console.log(credentialResponse);
-    //     try {
-    //         const res = await onGoogleLogin(credentialResponse);
-    //         console.log(res);
-    //     } catch (e) {
-    //         console.log(e);
-    //     }
-    // };
-
     const onGoogleLoginFailure = () => {
         console.log("Google login failed");
     };

@@ -6,11 +6,12 @@ import React from 'react';
 
 import { HomePage } from './pages/homePage/HomePage';
 import { AdminPage } from './pages/adminPage/AdminPage';
-import { LoginPage, SignUpPage } from './pages/login/LoginPage';
+import { LoginPage, SignUpPage } from './pages/Login/LoginPage';
 import { PageNotFound } from './pages/PageNotFound';
 import { useAuthContext } from './providers';
 import { Navbar } from './ui';
 import { ItemProfile } from './pages/itemProfile/ItemProfile';
+import { ProfilePage } from './pages/profilePage/ProfilePage';
 
 export const Router: FC = () => {
     return (
@@ -20,6 +21,7 @@ export const Router: FC = () => {
                             <Route index element={<HomePage />} />
                             <Route path="cart/:id/:idInDB" element={<CartPage />} />
                             <Route path="cart" element={<CartPage />} />
+                            <Route path="profile" element={<ProfilePage />} />
                             <Route path="itemProfile/:id" element={<ItemProfile />} />
                             <Route path="*" element={<PageNotFound />} />
                         </Route>
