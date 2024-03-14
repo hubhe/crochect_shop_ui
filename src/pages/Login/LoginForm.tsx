@@ -7,16 +7,17 @@ import { CredentialResponse, GoogleLogin } from '@react-oauth/google';
 import { registerGoogle } from '../../providers/auth/serverAuth';
 import { TextInput, PasswordInput, ImageInput } from '../../ui';
 
+
 const MAX_PASSWORD_DIGITS = 8;
 
 export interface FormProps {
     type: 'Login' | 'Sign Up';
     onLogin: (email: string, password: string, name: string, imageUrl: string | null) => Promise<void>;
-    onGoogleLoginSuccess?: (response: any) => Promise<void>; 
+    onGoogleLogin?: (response: any) => Promise<void>; 
 
 }
 
-export const LoginForm: FC<FormProps> = ({ type, onLogin }) => {
+export const LoginForm: FC<FormProps> = ({ type, onLogin, onGoogleLogin }) => {
     const [name, setName] = useState<string>('');
     const [email, setEmail] = useState<string>('');
     const [confirmEmail, setConfirmEmail] = useState<string>('');
@@ -44,15 +45,29 @@ export const LoginForm: FC<FormProps> = ({ type, onLogin }) => {
         return setIsValid(true);
     }, [email, password, type, confirmEmail, confirmPassword, name]);
 
-    const onGoogleLoginSuccess = async (credentialResponse: CredentialResponse) => {
-        console.log(credentialResponse);
-        try {
-            const res = await registerGoogle(credentialResponse);
-            console.log(res);
-        } catch (e) {
-            console.log(e);
+
+    const onGoogleLoginSuccess = useCallback(async (response: any) => {
+        if (onGoogleLogin) {
+            setIsLoading(true);
+            try {
+                await onGoogleLogin(response);
+            } catch (error) {
+                console.error(error);
+            } finally {
+                setIsLoading(false);
+            }
         }
-    };
+    }, [onGoogleLogin]);
+
+    // const onGoogleLoginSuccess = async (credentialResponse: CredentialResponse) => {
+    //     console.log(credentialResponse);
+    //     try {
+    //         const res = await onGoogleLogin(credentialResponse);
+    //         console.log(res);
+    //     } catch (e) {
+    //         console.log(e);
+    //     }
+    // };
 
     const onGoogleLoginFailure = () => {
         console.log("Google login failed");

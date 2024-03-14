@@ -41,7 +41,7 @@ export const LoginPage: FC = () => {
         }
     }, [login]); // Include login in the dependencies array
 
-    const onGoogleLoginSuccess = useCallback(async (response: any) => {
+    const onGoogleLogin = useCallback(async (response: any) => {
         try {
             const { tokenId } = response; // Get the Google token ID
             const user = await googleSignUp?.(tokenId); // Call googleSignUp with tokenId
@@ -53,7 +53,7 @@ export const LoginPage: FC = () => {
     }, [googleSignUp]); // Include googleSignUp in the dependencies array
 
     return (
-        <Page type="Login" onLogin={onLogin} onGoogleLoginSuccess={onGoogleLoginSuccess} />
+        <Page type="Login" onLogin={onLogin} onGoogleLogin={onGoogleLogin} />
     );
 };
 
