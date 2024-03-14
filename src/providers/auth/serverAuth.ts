@@ -49,6 +49,8 @@ export async function registerGoogle(credentialResponse: CredentialResponse): Pr
         console.log("googleSignin ...")
         axios.post("http://localhost:3000/auth/google", credentialResponse).then((response) => {
             console.log(response)
+            localStorage.setItem('refreshToken', response.data.refreshToken);
+            localStorage.setItem('accessToken', response.data.accessToken);
             resolve(response.data)
         }).catch((error) => {
             console.log(error)

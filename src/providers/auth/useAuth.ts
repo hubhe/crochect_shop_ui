@@ -57,7 +57,8 @@ export const useAuth = () => {
     };
 
     const googleSignUp = async (credentialResponse: CredentialResponse) => {
-        const user = await registerGoogle(credentialResponse);
+        const response = await registerGoogle(credentialResponse);
+        const user = response.user
         onUserChange(user);
         return user;
     }
