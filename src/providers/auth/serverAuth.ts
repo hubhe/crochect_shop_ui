@@ -21,19 +21,16 @@ interface RegisterRensponse {
   refreshToken: string;
 }
 
-interface Tokens {
-  accessToken: string;
-  refreshToken: string;
-}
-
 interface LoginResponse {
     user: User;
-    tokens: Tokens;
+    accessToken: string;
+    refreshToken: string;
   }
 
   interface AuthResponse {
     message: string;
-    token?: string;
+    accessToken: string;
+    refreshToken: string;
   }
 
 export async function register(email: string, password: string, name: string, image: string | null): Promise<any> {
@@ -64,8 +61,8 @@ export async function login(email: string, password: string): Promise<any> {
   try {
     const response = await axios.post<LoginResponse>('http://localhost:3000/auth/login', { email, password });
     // Cookies.set('token', token, { expires: 1, secure: true, sameSite: 'strict' });
-    localStorage.setItem('refreshToken', response.data.tokens.refreshToken);
-    localStorage.setItem('accessToken', response.data.tokens.accessToken);
+    localStorage.setItem('refreshToken', response.data.refreshToken);
+    localStorage.setItem('accessToken', response.data.accessToken);
     
     return response;
   } catch (error) {
