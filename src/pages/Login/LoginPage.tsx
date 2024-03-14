@@ -12,11 +12,13 @@ import { useNavigate } from 'react-router-dom';
 
 export const SignUpPage: FC = () => {
     const { signUp } = useAuthContext();
+    const navigate = useNavigate();
 
     const onSignUp = useCallback(async (email: string, password: string, name: string, image: string | null) => {
         try {
             const user = await signUp?.(email, password, name, image);
             console.log('🚀 ~ file: loginPage.tsx:36 ~ onLogin ~ user', user);
+            navigate('/');
         } catch (e) {
             console.log('🚀 ~ file: loginPage.tsx:38 ~ onLogin ~ e', e);
         }
@@ -26,12 +28,14 @@ export const SignUpPage: FC = () => {
 };
 
 export const LoginPage: FC = () => {
+    const navigate = useNavigate();
     const { login, googleSignUp } = useAuthContext(); // Destructure googleSignUp from useAuthContext
 
     const onLogin = useCallback(async (email: string, password: string) => {
         try {
             const user = await login?.(email, password);
             console.log('🚀 ~ file: loginPage.tsx:36 ~ onLogin ~ user', user);
+            navigate('/');
         } catch (e) {
             console.log('🚀 ~ file: loginPage.tsx:38 ~ onLogin ~ e', e);
         }
@@ -42,7 +46,7 @@ export const LoginPage: FC = () => {
             const { tokenId } = response; // Get the Google token ID
             const user = await googleSignUp?.(tokenId); // Call googleSignUp with tokenId
             console.log('🚀 ~ Google login successful:', user);
-            // Redirect user after successful login (if needed)
+            navigate('/');
         } catch (error) {
             console.error('Error logging in with Google:', error);
         }
