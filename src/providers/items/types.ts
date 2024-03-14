@@ -1,11 +1,9 @@
 export interface BaseItem {
-    idFromDB: number;
-    comments: [];
+    // comments: [];
     id: number;
     name: string;
-    imageUrl: string;
-    added: number;
     price: number;
+    imgUrl: string;
 }
 
 export interface Genre {

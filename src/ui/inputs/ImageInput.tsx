@@ -1,8 +1,11 @@
+// ImageInput.tsx
 import React, { ChangeEvent } from 'react';
 
 interface ImageInputProps {
   onChange: (imageUrl: string | null) => void;
 }
+
+const defaultImageUrl = '/default-image.jpg';
 
 export const ImageInput: React.FC<ImageInputProps> = ({ onChange }) => {
   const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -18,7 +21,7 @@ export const ImageInput: React.FC<ImageInputProps> = ({ onChange }) => {
       };
       reader.readAsDataURL(selectedFile); // Read the file as data URL
     } else {
-      onChange(null); // If no file is selected, pass null
+      onChange(defaultImageUrl); // If no file is selected, use the default image URL
     }
   };
 

@@ -10,7 +10,8 @@ import React from 'react';
 export interface Item {
     id: number;
     name: string;
-    imageUrl: string;
+    price: number;
+    imgUrl: string;
     onClick?: (id: number) => void;
 }
 
@@ -189,7 +190,7 @@ const CarouselItem: FC<CarouselItemProps> = ({
     id,
     name,
     index,
-    imageUrl,
+    imgUrl,
     randomColors,
     onClick,
 }) => {
@@ -208,7 +209,7 @@ const CarouselItem: FC<CarouselItemProps> = ({
             >
                 {name}
             </h2>
-            <img className="item-img" src={imageUrl} />
+            <img className="item-img" src={imgUrl} />
         </div>
     );
 };

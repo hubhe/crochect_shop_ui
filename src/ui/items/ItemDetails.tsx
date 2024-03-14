@@ -11,9 +11,8 @@ import { useNavigate } from 'react-router-dom';
 type Props = BaseItem;
 
 export const ItemDetails: FC<Props> = ({
-    added,
     id,
-    imageUrl,
+    imgUrl,
     name,
     price,
 }) => {
@@ -24,11 +23,10 @@ export const ItemDetails: FC<Props> = ({
             className="item-details"
             onClick={() => navigate(`/itemProfile/${id}`)}
         >
-            <img src={imageUrl} />
+            <img src={imgUrl} />
             <h3>{name}</h3>
             <div className="details">
                 <span>Cost: {price}$</span>
-                <span>{added}</span>
             </div>
         </Card>
     );

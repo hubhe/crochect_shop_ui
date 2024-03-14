@@ -8,11 +8,9 @@ import { BaseItem, Genre, GenreDetails } from './types';
 
 export function parseToBaseItem(item: any): BaseItem {
     return {
-        idFromDB: item.idFromDB ? item.idFromDB : 0,
-        comments: item.comments ? item.comments : [],
+        // comments: item.comments ? item.comments : [],
         id: item.id,
-        added: item.added,
-        imageUrl: item.background_image ? item.background_image : item.imageUrl,
+        imgUrl: item.background_image ? item.background_image : item.imageUrl,
         name: item.name,
         price: item.price,
     };

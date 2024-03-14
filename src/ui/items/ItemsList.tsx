@@ -11,11 +11,11 @@ interface Props {
     items: BaseItem[];
     isLoading: boolean;
     title?: string;
-    loadMore: () => void;
+    // loadMore: () => void;
     onScroll?: (event: React.UIEvent<HTMLDivElement, UIEvent>) => void;
 }
 
-export const ItemsList: FC<Props> = ({ items, title, isLoading, loadMore, onScroll }) => {
+export const ItemsList: FC<Props> = ({ items, title, isLoading, onScroll }) => {
     return (
         <div className="items-list-wrapper" onScroll={onScroll}>
             {title && <h1>{title}</h1>}
@@ -27,7 +27,7 @@ export const ItemsList: FC<Props> = ({ items, title, isLoading, loadMore, onScro
             <LoadingButton
                 className="load-more-items"
                 loading={isLoading}
-                onClick={loadMore}
+                // onClick={loadMore}
                 variant="contained"
             >
                 Load More Items

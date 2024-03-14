@@ -101,7 +101,7 @@ export const ItemProfile: React.FC = () => {
                     {fullItem ? (
                         <Carousel
                             title=""
-                            items={fullItem?.screenShots}
+                            items={fullItem?.imageUrl}
                             autoSlide
                             isLoading={loadingFullItem}
                         />

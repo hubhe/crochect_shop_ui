@@ -1,3 +1,5 @@
+import storeItems from "../../data/items.json"
+
 import {
     parseToAchievements,
     parseToBaseItem,
@@ -32,8 +34,9 @@ export async function searchItems(tags = '', genres = '', search = '') {
 }
 
 export async function getItems(query: ItemQuery = {}) {
-    const res = await fetchFromUrl(getItemsUrl(query));
-    return res.results ? res.results.map(parseToBaseItem) : [];
+    // const res = await fetchFromUrl(getItemsUrl(query));
+    // return res.results ? res.results.map(parseToBaseItem) : [];
+    return storeItems;
 }
 
 export async function getItemById(id: number) {
