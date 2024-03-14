@@ -46,7 +46,7 @@ export const LoginForm: FC<FormProps> = ({ type, onLogin, onGoogleLogin }) => {
     }, [email, password, type, confirmEmail, confirmPassword, name]);
 
 
-    const onGoogleLoginSuccess = useCallback(async (response: any) => {
+    const onGoogleLoginSuccess = useCallback(async (response: CredentialResponse) => {
         if (onGoogleLogin) {
             setIsLoading(true);
             try {

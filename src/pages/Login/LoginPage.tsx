@@ -8,6 +8,7 @@ import { AppLogo } from '../../ui';
 import { FormProps, LoginForm } from './LoginForm';
 import { useAuthContext } from '../../providers/auth/AuthProvider';
 import { useNavigate } from 'react-router-dom';
+import { CredentialResponse } from '@react-oauth/google';
 
 
 export const SignUpPage: FC = () => {
@@ -41,10 +42,9 @@ export const LoginPage: FC = () => {
         }
     }, [login]); // Include login in the dependencies array
 
-    const onGoogleLogin = useCallback(async (response: any) => {
+    const onGoogleLogin = useCallback(async (response: CredentialResponse) => {
         try {
-            const { tokenId } = response; // Get the Google token ID
-            const user = await googleSignUp?.(tokenId); // Call googleSignUp with tokenId
+            const user = await googleSignUp?.(response); // Call googleSignUp with tokenId
             console.log('🚀 ~ Google login successful:', user);
             navigate('/');
         } catch (error) {
