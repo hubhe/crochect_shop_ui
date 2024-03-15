@@ -28,9 +28,11 @@ export const NavbarMenu: FC<PropsWithChildren> = ({ children }) => {
                         <span>Edit Profile</span>
                     </MenuItem>
                     {user?.email === 'admin@admin.com' ? (
-                    <MenuItem onClick={() => onClose('/admin')}>
-                        <span>Admin Page</span>
-                    </MenuItem>) : (
+                    <><MenuItem onClick={() => onClose('/admin/create')}>
+                            <span>Create Item</span>
+                        </MenuItem><MenuItem onClick={() => onClose('/admin/edit')}>
+                                <span>Edit Item</span>
+                            </MenuItem></>) : (
                         <MenuItem onClick={() => onClose('/cart')}>
                         <span>View Cart</span>
                     </MenuItem>
