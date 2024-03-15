@@ -6,7 +6,7 @@ import React from 'react';
 
 export const NavbarMenu: FC<PropsWithChildren> = ({ children }) => {
     const navigate = useNavigate();
-    const { signOut } = useAuthContext();
+    const { signOut, user } = useAuthContext();
 
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
     const open = Boolean(anchorEl);
@@ -25,14 +25,16 @@ export const NavbarMenu: FC<PropsWithChildren> = ({ children }) => {
             <div className="userMenu">
                 <Menu anchorEl={anchorEl} open={open} onClose={() => onClose()}>
                     <MenuItem onClick={() => onClose('/profile')}>
-                        <span>View Profile</span>
+                        <span>Edit Profile</span>
                     </MenuItem>
-                    <MenuItem onClick={() => onClose('/cart')}>
+                    {user?.email === 'admin@admin.com' ? (
+                    <MenuItem onClick={() => onClose('/admin')}>
+                        <span>Admin Page</span>
+                    </MenuItem>) : (
+                        <MenuItem onClick={() => onClose('/cart')}>
                         <span>View Cart</span>
                     </MenuItem>
-                    <MenuItem onClick={() => onClose()}>
-                        <span>Wish List</span>
-                    </MenuItem>
+                    )}
                     <MenuItem onClick={signOut}>
                         <span>Sign Out</span>
                     </MenuItem>

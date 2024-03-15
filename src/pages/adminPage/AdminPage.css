@@ -1,6 +1,45 @@
-.pageHeader {
+.item-page {
+    padding: 2vw 1.3vw 1vw;
     display: flex;
-    justify-content: space-between;
-    margin-left: 40px;
-    margin-right: 40px;
+    justify-content: center;
+    align-items: center;
+}
+
+.item-card {
+    display: flex;
+    flex-direction: row;
+    min-width: 80%;
+    position: relative;
+}
+
+.item-card .small-app-logo {
+    position: absolute;
+    top: 0.5em;
+    left: 0.5em;
+}
+
+.item-card .right-side {
+    width: 65%;
+    display: flex;
+    position: relative;
+}
+
+.item-card .right-side .item-background-img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+.item-card .right-side .app-logo {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 1.6em;
+}
+
+.item-card .right-side .app-logo svg {
+    height: 2em;
+    width: 2em;
 }

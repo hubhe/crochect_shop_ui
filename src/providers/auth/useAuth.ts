@@ -9,9 +9,11 @@ import {
     login,
 } from './authentiocation';
 import React from 'react';
+import { BaseItem } from '../items';
 
 export const useAuth = () => {
     const [user, setUser] = useState<User | null>(null);
+    const [item, setItem] = useState<BaseItem | null>(null);
     const [loading, setLoading] = useState(true);
 
     const onUserChange = async (rawUser: any | null) => {
@@ -51,6 +53,7 @@ export const useAuth = () => {
 
     return {
         user,
+        item,
         loading,
         signUp,
         googleSignUp,

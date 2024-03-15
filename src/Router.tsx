@@ -5,7 +5,7 @@ import { CartPage } from './pages/cartPage/CartPage';
 import React from 'react';
 
 import { HomePage } from './pages/homePage/HomePage';
-import { AdminPage } from './pages/adminPage/AdminPage';
+import { CreateItem,EditItem } from './pages/adminPage/AdminPage';
 import { LoginPage, SignUpPage } from './pages/Login/LoginPage';
 import { PageNotFound } from './pages/PageNotFound';
 import { useAuthContext } from './providers';
@@ -19,6 +19,8 @@ export const Router: FC = () => {
                     <Routes>
                         <Route path="/" element={<Navbar />}>
                             <Route index element={<HomePage />} />
+                            <Route path="admin/create" element={<CreateItem />} />
+                            <Route path="admin/edit" element={<EditItem />} />
                             <Route path="cart/:id/:idInDB" element={<CartPage />} />
                             <Route path="cart" element={<CartPage />} />
                             <Route path="profile" element={<ProfilePage />} />

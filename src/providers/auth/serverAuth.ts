@@ -89,6 +89,34 @@ export async function updateUserProfile(_id: string, data: FormData): Promise<bo
     }
 }
 
+export async function updateItem(data: FormData): Promise<boolean> {
+  try {
+      const token = localStorage.getItem('accessToken')
+      const headers = {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json'
+      };
+
+      const response = await axios.put(`http://localhost:3000/item/`, data, { headers });
+
+      const success = response.data.success;
+
+      return success ? true : false;
+  } catch (error) {
+      // Handle error
+      return false;
+  }
+}
+
+export async function createItem(formData: FormData): Promise<any> {
+  try {
+    const response = await axios.post<RegisterRensponse>('http://localhost:3000/item', formData);
+    return response;
+  } catch (error) {
+    return handleAuthError(error);
+  }
+}
+
 export async function signOut(): Promise<string> {
     try {
         const token = localStorage.getItem('refreshToken');
