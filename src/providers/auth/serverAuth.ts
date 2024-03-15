@@ -14,9 +14,7 @@ export interface User {
 }
 
 interface RegisterRensponse {
-  email: string;
-  _id: string;
-  imgUrl: string;
+  user: User;
   accessToken: string;
   refreshToken: string;
 }
@@ -38,7 +36,7 @@ export async function register(formData: FormData): Promise<any> {
     const response = await axios.post<RegisterRensponse>('http://localhost:3000/auth/register', formData);
     localStorage.setItem('refreshToken', response.data.refreshToken);
     localStorage.setItem('accessToken', response.data.accessToken);
-    return response;
+    return response.data.user;
   } catch (error) {
     return handleAuthError(error);
   }
@@ -49,7 +47,9 @@ export async function registerGoogle(credentialResponse: CredentialResponse): Pr
         console.log("googleSignin ...")
         axios.post("http://localhost:3000/auth/google", credentialResponse).then((response) => {
             console.log(response)
-            resolve(response.data)
+            localStorage.setItem('refreshToken', response.data.refreshToken);
+            localStorage.setItem('accessToken', response.data.accessToken);
+            resolve(response.data.user)
         }).catch((error) => {
             console.log(error)
             reject(error)
@@ -64,7 +64,7 @@ export async function login(email: string, password: string): Promise<any> {
     localStorage.setItem('refreshToken', response.data.refreshToken);
     localStorage.setItem('accessToken', response.data.accessToken);
     
-    return response;
+    return response.data.user;
   } catch (error) {
     return handleAuthError(error);
   }
