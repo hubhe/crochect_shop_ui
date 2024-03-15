@@ -69,11 +69,11 @@ export const ItemForm: FC<FormProps> = ({ type, onEdit }) => {
             <div>
                 {isEdit ? (
                     <span>
-                        Would like to add new item? <Link to="/create">Create</Link>
+                        Would like to add new item? <Link to="/admin/create">Create</Link>
                     </span>
                 ) : (
                     <span>
-                        Would like to edit an existing item? <Link to="/edit">Edit</Link>
+                        Would like to edit an existing item? <Link to="/admin/edit">Edit</Link>
                     </span>
                 )}
             </div>
