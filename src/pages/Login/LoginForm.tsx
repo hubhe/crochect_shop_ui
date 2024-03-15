@@ -29,13 +29,7 @@ export const LoginForm: FC<FormProps> = ({ type, onLogin, onGoogleLogin }) => {
     const [isLoading, setIsLoading] = useState<boolean>(false);
 
     const isLogin = useMemo(() => type === 'Login', [type]);
-
-    const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
-        if (event.target.files?.[0] !== undefined){
-            setImageInfo(event.target.files[0]);
-        }
-    }
-
+    
     const handleLogin = useCallback(async () => {
         setIsLoading(true);
         const formData: FormData = new FormData()
@@ -59,7 +53,7 @@ export const LoginForm: FC<FormProps> = ({ type, onLogin, onGoogleLogin }) => {
     }, [email, password, type, confirmEmail, confirmPassword, name]);
 
 
-    const onGoogleLoginSuccess = useCallback(async (response: CredentialResponse) => {
+    const onGoogleLoginSuccess = useCallback(async (response: any) => {
         if (onGoogleLogin) {
             setIsLoading(true);
             try {
@@ -71,6 +65,16 @@ export const LoginForm: FC<FormProps> = ({ type, onLogin, onGoogleLogin }) => {
             }
         }
     }, [onGoogleLogin]);
+
+    // const onGoogleLoginSuccess = async (credentialResponse: CredentialResponse) => {
+    //     console.log(credentialResponse);
+    //     try {
+    //         const res = await onGoogleLogin(credentialResponse);
+    //         console.log(res);
+    //     } catch (e) {
+    //         console.log(e);
+    //     }
+    // };
 
     const onGoogleLoginFailure = () => {
         console.log("Google login failed");
@@ -99,17 +103,7 @@ export const LoginForm: FC<FormProps> = ({ type, onLogin, onGoogleLogin }) => {
                 />
             )}
             {!isLogin && (
-            // <ImageInput onChange={setImageInfo} />
-            <div>
-            <label>
-              Upload Profile Picture:
-              <input
-                type="file"
-                accept="image/jpeg, image/png"
-                onChange={handleFileChange}
-              />
-            </label>
-          </div>
+            <ImageInput onChange={setImageInfo} />
             )}
 
             {isLogin && (

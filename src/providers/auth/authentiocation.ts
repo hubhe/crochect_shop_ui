@@ -37,19 +37,8 @@ export async function signUp(formData: FormData): Promise<User> {
     }
 }
 
-export async function updateProfile(id: string | undefined, name: string | null,
-    email: string | null, password: string | null, photoUrl: string | null): Promise<User> {
-        try {
-            const userCredential = await updateUserProfile(id, email, password, name, photoUrl);
-    
-            return userCredential.data.user;
-        } catch (error) {
-            const authError = error as AuthEventError;
-            const errorCode = authError.code;
-            const errorMessage = authError.message;
-    
-            throw error;
-        }
+export function updateProfile(_id: string, data: FormData): Promise<boolean> {
+    return updateUserProfile(_id, data);
 }
 
 export async function login(email: string, password: string): Promise<User> {
@@ -65,4 +54,3 @@ export async function login(email: string, password: string): Promise<User> {
         throw error;
     }
 }
-

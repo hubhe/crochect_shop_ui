@@ -8,25 +8,27 @@ import { AppLogo } from '../../ui';
 import { FormProps, ProfileForm } from './ProfileForm';
 import { useAuthContext } from '../../providers/auth/AuthProvider';
 import { useNavigate } from 'react-router-dom';
+import { updateUserProfile } from '../../providers/auth/serverAuth';
+import axios from 'axios';
 
 
 export const ProfilePage: FC = () => {
     const navigate = useNavigate();
-    const { user, updateProfile } = useAuthContext(); // Destructure googleSignUp from useAuthContext
+    const { user } = useAuthContext(); // Destructure googleSignUp from useAuthContext
 
     const onUpdate = useCallback(async (formData: FormData) => {
         try {
-            const email = formData.get("email");
-            const password = formData.get("password");
-            const name = formData.get("name");
-            const imageUrl = formData.get("name");
-            const userToUpdate = await updateProfile?.(user?._id, );
-            console.log('🚀 ~ file: loginPage.tsx:36 ~ onLogin ~ user', userToUpdate);
-            navigate('/');
+            if (user?._id)
+                await updateUserProfile(user._id, formData);
+            // navigate('/');
         } catch (e) {
             console.log('🚀 ~ file: loginPage.tsx:38 ~ onLogin ~ e', e);
         }
-    }, [updateProfile]); 
+    }, []); 
+
+    useEffect(()=>{
+        console.log(user)
+    }, [user])
 
     return (
         <Page type="update" onUpdate={onUpdate}/>
@@ -37,16 +39,12 @@ const Page: FC<FormProps> = (formProps) => {
     const navigate = useNavigate();
     const { user } = useAuthContext();
 
-    useEffect(() => {
-        if (user) navigate('/');
-    }, [user]);
-
     return (
         <div className="profile-page">
             <Card className="profile-card">
                 <ProfileForm {...formProps} />
                 <div className="right-side">
-                    <img className="profile-background-img" src={user?.imgUrl} />
+                    <img className="profile-background-img" src={`http://localhost:3000/public/${user?.imgUrl}`} />
                 </div>
                 <AppLogo className="small-app-logo" small />
             </Card>

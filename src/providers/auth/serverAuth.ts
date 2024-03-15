@@ -70,30 +70,23 @@ export async function login(email: string, password: string): Promise<any> {
   }
 }
 
-export async function updateUserProfile(id: string | undefined, name: string | null,
-  email: string | null, password: string | null, photoUrl: string | null): Promise<any> {
-   try {
-       const body = {
-           _id: id,
-           photoUrl: photoUrl,
-           name: name,
-           email: email,
-           password: password
-       };
+export async function updateUserProfile(_id: string, data: FormData): Promise<boolean> {
+    try {
+        const token = localStorage.getItem('accessToken')
+        const headers = {
+            Authorization: `Bearer ${token}`,
+            'Content-Type': 'application/json'
+        };
 
-       const headers = {
-           'Content-Type': 'application/json'
-       };
+        const response = await axios.put(`http://localhost:3000/user/${_id}`, data, { headers });
 
-       const response = await axios.put('http://localhost:3000/updateProfile', body, { headers });
+        const success = response.data.success;
 
-       const success = response.data.success;
-
-       return success ? true : false;
-   } catch (error) {
-       // Handle error
-       return false;
-   }
+        return success ? true : false;
+    } catch (error) {
+        // Handle error
+        return false;
+    }
 }
 
 export async function signOut(): Promise<string> {
