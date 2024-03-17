@@ -1,3 +1,2 @@
-export * from './itemsApiParses';
+export * from './ItemsService';
 export * from './types';
-export * from './itemsProvider';

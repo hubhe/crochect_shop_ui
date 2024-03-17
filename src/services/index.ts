@@ -1,2 +1,2 @@
 export * as AuthService from './auth';
-export * from './items';
+export * as ItemsService from './items';

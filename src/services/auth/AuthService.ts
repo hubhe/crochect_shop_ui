@@ -1,5 +1,5 @@
 
-import { serverFetch, userFetch } from '../ServiceUtil';
+import { handleAuthError, serverFetch, userFetch } from '../ServiceUtil';
 import { CredentialResponse } from '@react-oauth/google'
 import { To } from 'react-router';
 import { AuthResponse, LoginResponse, RegisterRensponse, User } from './types';
@@ -78,13 +78,3 @@ export async function getActiveUser(): Promise<User | null> {
     const res = await userFetch.get('/user')
     return res.data.user
 } 
-
-function handleAuthError(error: any): string {
-  if (axios.isAxiosError(error)) {
-    const axiosError = error as AxiosError<AuthResponse>;
-    if (axiosError.response?.data?.message) {
-      return axiosError.response.data.message;
-    }
-  }
-  return 'An error occurred during authentication';
-}

@@ -38,7 +38,18 @@ userFetch.interceptors.response.use(
     },
 )
 
+function handleAuthError(error: any): string {
+    if (axios.isAxiosError(error)) {
+      const axiosError = error as AxiosError<any>;
+      if (axiosError.response?.data?.message) {
+        return axiosError.response.data.message;
+      }
+    }
+    return 'An error occurred during authentication';
+  }
+
 export {
     serverFetch, 
-    userFetch
+    userFetch,
+    handleAuthError
 }

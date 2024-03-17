@@ -7,15 +7,15 @@ import React from 'react';
 import { AppLogo } from '../../ui';
 import { FormProps, ItemForm } from './ItemForm';
 import { useNavigate } from 'react-router-dom';
-import { createItem, updateItem } from '../../providers/auth/serverAuth';
-
+import { CredentialResponse } from '@react-oauth/google';
+import { ItemsService } from '../../services';
 
 export const CreateItem: FC = () => {
     const navigate = useNavigate();
 
     const onCreate = useCallback(async (formData: FormData) => {
         try {
-            const item = await createItem?.(formData);
+            const item = await ItemsService.createItem(formData);
             console.log('Created item successfully: ', item);
             navigate('/');
         } catch (e) {
@@ -31,7 +31,7 @@ export const EditItem: FC = () => {
 
     const onEdit = useCallback(async (formData: FormData) => {
         try {
-            const item = await updateItem?.(formData);
+            const item = await ItemsService.updateItem(formData);
             console.log('Edited item successfully: ', item);
             navigate('/');
         } catch (e) {
