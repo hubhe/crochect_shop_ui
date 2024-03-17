@@ -5,7 +5,7 @@ import classNames from 'classnames';
 import Card from '@mui/material/Card';
 import React from 'react';
 
-import type { BaseItem } from '../../providers';
+import type { BaseItem } from '../../services';
 import { useNavigate } from 'react-router-dom';
 
 type Props = BaseItem;

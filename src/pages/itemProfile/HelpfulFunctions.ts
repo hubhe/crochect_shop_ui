@@ -1,4 +1,4 @@
-import { GetCommentFromDB } from '../../providers';
+import { GetCommentFromDB } from '../../services';
 
 export const AddNewCommentToDB = async (content: string, itemID: number, userID: string) => {
     await fetch(`http://localhost:1234/comment`, {

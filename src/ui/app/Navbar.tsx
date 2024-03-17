@@ -2,16 +2,16 @@ import './Navbar.css';
 
 import { Link, Outlet, useNavigate } from 'react-router-dom';
 import { Avatar } from '@mui/material';
-import React from 'react';
+import React, { useContext } from 'react';
 
 import { AppLogo } from './AppLogo';
-import { useAuthContext } from '../../providers/auth/AuthProvider';
 import { useCallback } from 'react';
 import { NavbarMenu } from './NavbarMenu';
+import { AuthContext } from '../../Contexts';
 
 export const Navbar = () => {
     const navigate = useNavigate();
-    const { user } = useAuthContext();
+    const { user } = useContext(AuthContext);
 
     const goToHomePage = useCallback(() => navigate('/'), []);
 

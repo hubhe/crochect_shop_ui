@@ -6,9 +6,7 @@ import React from 'react';
 
 import { AppLogo } from '../../ui';
 import { FormProps, ItemForm } from './ItemForm';
-import { useAuthContext } from '../../providers/auth/AuthProvider';
 import { useNavigate } from 'react-router-dom';
-import { CredentialResponse } from '@react-oauth/google';
 import { createItem, updateItem } from '../../providers/auth/serverAuth';
 
 

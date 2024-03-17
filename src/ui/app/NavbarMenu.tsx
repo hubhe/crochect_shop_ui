@@ -1,12 +1,13 @@
 import { Menu, MenuItem } from '@mui/material';
-import { FC, PropsWithChildren, useState } from 'react';
+import { FC, PropsWithChildren, useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useAuthContext } from '../../providers/auth/AuthProvider';
 import React from 'react';
+import { AuthService } from '../../services';
+import { AuthContext } from '../../Contexts';
 
 export const NavbarMenu: FC<PropsWithChildren> = ({ children }) => {
     const navigate = useNavigate();
-    const { signOut, user } = useAuthContext();
+    const { setUser } = useContext(AuthContext)
 
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
     const open = Boolean(anchorEl);
@@ -20,6 +21,12 @@ export const NavbarMenu: FC<PropsWithChildren> = ({ children }) => {
         if (url) navigate(url);
     };
 
+    const signOut = () => {
+        AuthService.signOut();
+        setUser(null);
+        navigate('/')
+    }
+
     return (
         <>
             <div className="userMenu">
@@ -27,16 +34,12 @@ export const NavbarMenu: FC<PropsWithChildren> = ({ children }) => {
                     <MenuItem onClick={() => onClose('/profile')}>
                         <span>Edit Profile</span>
                     </MenuItem>
-                    {user?.email === 'admin@admin.com' ? (
-                    <><MenuItem onClick={() => onClose('/admin/create')}>
+                    <MenuItem onClick={() => onClose('/post/create')}>
                             <span>Create Item</span>
-                        </MenuItem><MenuItem onClick={() => onClose('/admin/edit')}>
+                        </MenuItem><MenuItem onClick={() => onClose('/post/edit')}>
                                 <span>Edit Item</span>
-                            </MenuItem></>) : (
-                        <MenuItem onClick={() => onClose('/cart')}>
-                        <span>View Cart</span>
-                    </MenuItem>
-                    )}
+                            </MenuItem>
+
                     <MenuItem onClick={signOut}>
                         <span>Sign Out</span>
                     </MenuItem>
@@ -46,3 +49,4 @@ export const NavbarMenu: FC<PropsWithChildren> = ({ children }) => {
         </>
     );
 };
+

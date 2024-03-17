@@ -1,10 +1,11 @@
 import './profilePage.css';
-import React, { FC, useState, useCallback, useEffect } from 'react';
+import React, { FC, useState, useCallback, useEffect, useMemo, ChangeEvent, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import SendIcon from '@mui/icons-material/Send';
 import LoadingButton from '@mui/lab/LoadingButton';
+import { CredentialResponse, GoogleLogin } from '@react-oauth/google';
 import { TextInput, PasswordInput, ImageInput } from '../../ui';
-import { useAuthContext } from '../../providers/auth';
+import { AuthContext } from '../../Contexts';
 
 
 const MAX_PASSWORD_DIGITS = 8;
@@ -15,7 +16,7 @@ export interface FormProps {
 }
 
 export const ProfileForm: FC<FormProps> = ({ type, onUpdate }) => {    
-    const { user } = useAuthContext();
+    const { user } = useContext(AuthContext);
     const [name, setName] = useState<string>('');
     const [email, setEmail] = useState<string>('');
     const [password, setPassword] = useState<string>('');

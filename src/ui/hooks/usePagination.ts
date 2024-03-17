@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
-import { fetchFromUrl, GetItemFromDB } from '../../providers';
+import { fetchFromUrl, GetItemFromDB } from '../../services';
 
 const DISTANCE_FROM_BOTTOM = 100;
 

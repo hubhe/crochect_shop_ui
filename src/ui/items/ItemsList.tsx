@@ -4,7 +4,7 @@ import { FC } from 'react';
 import LoadingButton from '@mui/lab/LoadingButton';
 import React from 'react';
 
-import { BaseItem } from '../../providers';
+import { BaseItem } from '../../services';
 import { ItemDetails } from './ItemDetails';
 
 interface Props {

@@ -5,23 +5,23 @@ import {
     TextField,
 } from '@mui/material';
 import SendIcon from '@mui/icons-material/Send';
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import {
     getItemById,
-} from '../../providers';
-import { useAuthContext } from '../../providers/auth/AuthProvider';
+} from '../../services';
 import { Carousel } from '../../ui';
 import { useFetch } from '../../ui/hooks/useFetch';
 import Button from '@mui/material/Button';
 import { AddNewCommentToDB, connectCommentToItemAndUser } from './HelpfulFunctions';
 import storeItems from '../../data/items.json';
+import { AuthContext } from '../../Contexts';
 
 
 export const ItemProfile: React.FC = () => {
     const { id } = useParams();
     const navigate = useNavigate();
-    const { user } = useAuthContext();
+    const { user } = useContext(AuthContext);
     const {
         value: fullItem,
         isLoading: loadingFullItem,
