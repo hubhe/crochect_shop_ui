@@ -20,3 +20,9 @@
     margin: 1em 0;
     width: 100%;
 }
+.item-card {
+    display: flex;
+    flex-direction: row;
+    min-width: 80%;
+    position: relative;
+}

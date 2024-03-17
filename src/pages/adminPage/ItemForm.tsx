@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom';
 import SendIcon from '@mui/icons-material/Send';
 import LoadingButton from '@mui/lab/LoadingButton';
 import { TextInput, PasswordInput, ImageInput } from '../../ui';
+import { GenericCarousel } from '../homePage/GenericCarousel';
+import storeItems from '../../data/items.json';
 
 
 export interface FormProps {
@@ -40,8 +42,15 @@ export const ItemForm: FC<FormProps> = ({ type, onEdit }) => {
         return setIsValid(true);
     }, [price, type, name]);
 
+    const items = storeItems;
+    const onClickItem = (id: number) => {
+        console.log(`Item clicked: ${id}`);
+        setItemID(id.toString());
+        // Handle item click logic here
+    };
 
     return (
+        <div>
         <div className="item-form">
             <h2>{isEdit ? 'Edit Item' : 'Create Item'}</h2>
             {isEdit && (
@@ -77,6 +86,15 @@ export const ItemForm: FC<FormProps> = ({ type, onEdit }) => {
                     </span>
                 )}
             </div>
+        </div>
+
+        {isEdit && (<div><GenericCarousel 
+            type="Shop"
+            items={items}
+            isLoading={false}
+            onClickItem={onClickItem}
+             />
+             </div>)}
         </div>
     );
 };
