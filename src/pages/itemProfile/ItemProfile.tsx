@@ -57,16 +57,6 @@ export const ItemProfile: React.FC = () => {
                     <div className="buy-item-title-div">
                         <h1 className="buy-item-title">{`Buy ${fullItem?.name}:`}</h1>
                     </div>
-                    <div className="buy-item-btn">
-                        <span>{fullItem?.price}$</span>
-                        <Button
-                            className="add-to-card-btn"
-                            variant="outlined"
-                            onClick={() => navigate(`/cart/${fullItem?.id}`)}
-                        >
-                            Add To Cart
-                        </Button>
-                    </div>
                 </div>
             </div>
         </div><br /><div className="bottom-profile">
