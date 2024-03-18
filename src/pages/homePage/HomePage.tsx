@@ -33,6 +33,7 @@ export const HomePage: FC = () => {
                 <div className="posts">
         {items.map((item, index) => (
             <ItemCard
+                key={item.id}
               name={item.name}
               uploader={item.uploader}
               comments={item.comments.length}
