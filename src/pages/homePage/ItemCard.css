@@ -1,0 +1,10 @@
+.card {
+    width: 300px; /* Four cards in a row with 20px spacing */
+    margin-bottom: 20px; /* Vertical spacing between rows */
+  }
+  
+  .item-img {
+    width: 100%; /* Ensure the image fills the entire width of the card */
+    height: auto; /* Maintain aspect ratio */
+  }
+  
