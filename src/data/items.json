@@ -1,64 +1,65 @@
 [
     {
-      "id": 1,
+      "id": "1",
       "name": "Rainbow Bunny",
-      "price": 30,
+      "uploader": "gever",
       "comments": [],
       "imgUrl": "/imgs/rosie.jpg"
     },
     {
-      "id": 2,
+      "id": "2",
       "name": "Chick",
-      "price": 15,
+      "uploader": "gever",
       "comments": [],
       "imgUrl": "/imgs/chicks.jpg"
     },
     {
-      "id": 3,
+      "id": "3",
       "name": "Mini Cow",
-      "price": 15,
+      "uploader": "gever",
       "comments": [],
       "imgUrl": "/imgs/mini-cow.jpg"
     },
     {
-      "id": 4,
+      "id": "4",
       "name": "Polar Bear",
-      "price": 20,
+      "uploader": "gever",
       "comments": [],
       "imgUrl": "/imgs/polar-bears.jpg"
     },
     {
-      "id": 5,
+      "id": "5",
       "name": "Succulent",
-      "price": 20,
       "comments": [],
+      "uploader": "gever",
       "imgUrl": "/imgs/succulent.jpg"
     },
     {
-      "id": 6,
+      "id": "6",
       "name": "Cactus",
-      "price": 20,
       "comments": [],
+      "uploader": "gever",
       "imgUrl": "/imgs/cactus.jpg"
     },
     {
-      "id": 7,
+      "id": "7",
       "name": "Perry the Platypus",
       "price": 20,
+      "uploader": "gever",
       "comments": [],
       "imgUrl": "/imgs/perry.jpg"
     },
     {
-      "id": 8,
+      "id": "8",
       "name": "Snake",
-      "price": 25,
       "comments": [],
-      "imgUrl": "/imgs/snake.jpg"
+      "imgUrl": "/imgs/snake.jpg",
+      "uploader": "gever"
     },
     {
-      "id": 9,
+      "id": "9",
       "name": "Cat",
-      "price": 15,
+      "uploader": "gever",
       "comments": [],
       "imgUrl": "/imgs/cat.jpg"
     }

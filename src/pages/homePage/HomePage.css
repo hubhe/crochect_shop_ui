@@ -8,7 +8,7 @@
     background-position: top;
     background-repeat: no-repeat;
     background-size: cover;
-    height: 84%;
+    height: 100%; /* Adjusted height to occupy full height */
 }
 
 .home-page .top-items-carousel .carousel {
@@ -18,3 +18,13 @@
 .home-page .main-title {
     font-size: 3em;
 }
+  .card {
+    width: calc(25% - 20px); /* Four cards in a row with 20px spacing */
+    margin-bottom: 20px; /* Vertical spacing between rows */
+  }
+  
+  .item-img {
+    width: 100%; /* Ensure the image fills the entire width of the card */
+    height: auto; /* Maintain aspect ratio */
+  }
+    
