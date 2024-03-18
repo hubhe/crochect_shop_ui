@@ -30,20 +30,16 @@ export const HomePage: FC = () => {
                     items={topItems}
                     autoSlide
                 />
-                {Array.from({ length: items.length }).map((_, index) => (
-                <ItemCard
-                    key={index}
-                    name={items[index].name}
-                    uploader={items[index].uploader}
-                    image_url={items[index].imgUrl}
-                />))}
-                {/* <GenericCarousel 
-                type="Shop"
-                items={items}
-                isLoading={false}
-                onClickItem={onClickItem}
-                 /> */}
-
+                <div className="posts">
+        {items.map((item, index) => (
+            <ItemCard
+              name={item.name}
+              uploader={item.uploader}
+              comments={item.comments.length}
+              image_url={item.imgUrl}
+            />
+        ))}
+      </div>
                  
             </div>
         </div>
