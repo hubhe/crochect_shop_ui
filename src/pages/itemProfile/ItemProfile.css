@@ -1,30 +1,15 @@
 .main-item-screen {
     display: flex !important;
     align-items: stretch;
-}
-
-.item-screenshots {
-    flex: 1;
-    padding: 1em;
-}
-
-.item-screenshots .carousel {
-    height: 25em !important;
+    flex-wrap: wrap; /* Allow items to wrap to the next row */
+    justify-content: space-between; /* Distribute items evenly */
+    padding: 10px;
 }
 
 .genral-item-info {
     margin: 0 20px;
 }
 
-.add-to-card-btn {
-    background: #ec75a9;
-    border: white 1px solid !important;
-    border-radius: 1em !important;
-}
-
-.add-to-card-btn:hover {
-    background: rgb(1, 22, 22) !important;
-}
 
 .bottom-profile {
     display: grid;
@@ -32,15 +17,24 @@
     gap: 1em;
     padding: 0.5em;
     align-items: start;
-    margin-top: -20em; /* Adjust the margin to push it upwards */
+    margin-top: auto; /* Adjust the margin to push it upwards */
 }
 
 .item-info {
-    margin: 1em;
+    margin: auto;
+    align-items: center;
 }
 
 .item-info h2 {
-    margin: 0.5em;
+    margin: auto;
+}
+
+.item-card {
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    min-width: 80%;
+    position: relative;
 }
 
 .item-info img {
@@ -50,11 +44,10 @@
 }
 
 .buy-item-title {
-    text-align: left;
-    margin-left: 2em;
+    text-align: center;
+    margin-left: auto;
 }
 
-.buy-item {}
 
 .buy-item-btn {
     padding-bottom: 0.5em;

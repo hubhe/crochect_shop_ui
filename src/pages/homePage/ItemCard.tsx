@@ -1,18 +1,24 @@
 import React from 'react';
-import './ItemCard.css'
+import './ItemCard.css';
 
 interface ItemCardProps {
+  id: string;
   name: string;
   uploader: string;
   image_url: string;
   comments: number;
+  onClickItem?: (id: string) => void;
 }
 
+const ItemCard: React.FC<ItemCardProps> = ({ id, name, uploader, comments, image_url, onClickItem }) => {
+  const handleClick = () => {
+    if (onClickItem) {
+      onClickItem(id);
+    }
+  };
 
-
-const ItemCard: React.FC<ItemCardProps> = ({ name, uploader, comments, image_url }) => {
   return (
-    <div className="card">
+    <div className="card" onClick={handleClick}>
       <div className="card-body">
         <h5 className="card-title">{name}</h5>
         <p className="card-text">Author: {uploader}</p>

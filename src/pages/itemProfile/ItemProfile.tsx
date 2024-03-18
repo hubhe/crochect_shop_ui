@@ -13,6 +13,8 @@ import Button from '@mui/material/Button';
 import { CommentService, ItemsService } from '../../services';
 import storeItems from '../../data/items.json';
 import { AuthContext, ItemContext } from '../../Contexts';
+import Card from '@mui/material/Card';
+
 
 export const ItemProfile: React.FC = () => {
     const { id } = useParams();
@@ -48,11 +50,13 @@ export const ItemProfile: React.FC = () => {
 
     return (
         <>
+        <Card className="item-card">
           <div style={{ height: '100%', overflowY: 'auto' }}>
             <div className="main-item-screen">
                 <div className="buy-item-title-div">
                   <h1 className="buy-item-title">{`${item?.name} by`}</h1>
                 </div>
+                <br/>
                 <div className='item-info'>
                   <img
                     src={item?.imgUrl}
@@ -63,6 +67,7 @@ export const ItemProfile: React.FC = () => {
                 </div>
             </div>
           </div>
+          </Card>
           <br />
           <div className="bottom-profile">
             <div className="item-comments">
@@ -93,14 +98,6 @@ export const ItemProfile: React.FC = () => {
                 {item?.comments && item?.comments.length !== 0 ? (
                   item?.comments.map((comment: any, i: any) => (
                     <div key={i} className="written-comments">
-                      <Badge badgeContent={comment?.likes.length} color="primary" key={i}>
-                        <div className="written-comment-info">
-                          <div className="written-comments-name">
-                            By User: {comment?.userName}
-                          </div>
-                          <div className="written-comments-content">{comment?.content}</div>
-                        </div>
-                      </Badge>
                     </div>
                   ))
                 ) : (

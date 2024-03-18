@@ -16,11 +16,6 @@
 }
 
 .home-page .posts {
-  /* display: flex;
-  flex-wrap: wrap; 
-  justify-content: space-between; 
-  align-items: flex-start; 
-  margin: 0 -10px;  */
   display: flex;
   flex-wrap: wrap; /* Allow items to wrap to the next row */
   justify-content: space-between; /* Distribute items evenly */
