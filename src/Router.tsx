@@ -8,7 +8,7 @@ import { CreateItem,EditItem } from './pages/adminPage/AdminPage';
 import { LoginPage, SignUpPage } from './pages/Login/LoginPage';
 import { PageNotFound } from './pages/PageNotFound';
 import { Navbar } from './ui';
-// import { ItemProfile } from './pages/itemProfile/ItemProfile';
+import { ItemProfile } from './pages/itemProfile/ItemProfile';
 import { ProfilePage } from './pages/profilePage/ProfilePage';
 
 export const Router: FC = () => {
@@ -20,7 +20,7 @@ export const Router: FC = () => {
                             <Route path="post/create" element={<CreateItem />} />
                             <Route path="post/edit" element={<EditItem />} />
                             <Route path="profile" element={<ProfilePage />} />
-                            {/* <Route path="itemProfile/:id" element={<ItemProfile />} /> */}
+                            <Route path="itemProfile/:id" element={<ItemProfile />} />
                             <Route path="*" element={<PageNotFound />} />
                         </Route>
                         <Route path="/login" element={<LoginPage />} />

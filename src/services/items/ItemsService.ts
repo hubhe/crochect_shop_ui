@@ -38,3 +38,12 @@ export async function updateItem(data: FormData): Promise<boolean> {
       return handleAuthError(error);
     }
   }
+
+  export async function getItemById(_id:string): Promise<any> {
+    try {
+      const response = await userFetch.get<RegisterRensponse>(`/item/${_id}`);
+      return response;
+    } catch (error) {
+      return handleAuthError(error);
+    }
+  }

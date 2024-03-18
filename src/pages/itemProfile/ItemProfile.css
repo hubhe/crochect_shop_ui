@@ -17,22 +17,22 @@
 }
 
 .add-to-card-btn {
-    /* background: rgb(1, 54, 54) !important; */
-    background:#ec75a9;
+    background: #ec75a9;
     border: white 1px solid !important;
     border-radius: 1em !important;
 }
 
-.add-to-card-btn :hover {
+.add-to-card-btn:hover {
     background: rgb(1, 22, 22) !important;
 }
 
 .bottom-profile {
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 3em;
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+    gap: 1em;
     padding: 0.5em;
     align-items: start;
+    margin-top: -20em; /* Adjust the margin to push it upwards */
 }
 
 .item-info {
@@ -54,9 +54,7 @@
     margin-left: 2em;
 }
 
-.buy-item {
-    /* background-color: #292929; */
-}
+.buy-item {}
 
 .buy-item-btn {
     padding-bottom: 0.5em;
@@ -78,7 +76,6 @@
 }
 
 .written-comments {
-    /* background-color: #444444; */
     margin-bottom: 1em;
     width: 90%;
     margin-left: auto;
@@ -107,3 +104,12 @@
     flex: 1 1 0px !important;
     font-size: 1.5em;
 }
+
+.item-info {
+    width: auto;
+}
+
+.item-img {
+    width: 100%; /* Ensure the image fills the entire width of the card */
+    height: auto; /* Maintain aspect ratio */
+  }
