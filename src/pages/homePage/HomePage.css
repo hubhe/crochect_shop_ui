@@ -8,23 +8,29 @@
     background-position: top;
     background-repeat: no-repeat;
     background-size: cover;
-    height: 100%; /* Adjusted height to occupy full height */
+    height: 100%; 
 }
 
 .home-page .top-items-carousel .carousel {
     height: 35em;
 }
 
+.home-page .posts {
+  /* display: flex;
+  flex-wrap: wrap; 
+  justify-content: space-between; 
+  align-items: flex-start; 
+  margin: 0 -10px;  */
+  display: flex;
+  flex-wrap: wrap; /* Allow items to wrap to the next row */
+  justify-content: space-between; /* Distribute items evenly */
+  padding: 10px;
+}
+
+
+
+
 .home-page .main-title {
     font-size: 3em;
 }
-  .card {
-    width: calc(25% - 20px); /* Four cards in a row with 20px spacing */
-    margin-bottom: 20px; /* Vertical spacing between rows */
-  }
-  
-  .item-img {
-    width: 100%; /* Ensure the image fills the entire width of the card */
-    height: auto; /* Maintain aspect ratio */
-  }
     

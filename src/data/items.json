@@ -3,7 +3,7 @@
       "id": "1",
       "name": "Rainbow Bunny",
       "uploader": "gever",
-      "comments": [],
+      "comments": ["hi", "hello", "wassup"],
       "imgUrl": "/imgs/rosie.jpg",
       "description": "Best product ever"
     },

@@ -3,12 +3,12 @@
       "id": 1,
       "name": "",
       "price": 0,
-      "imgUrl": "/imgs/adopt.png"
+      "imgUrl": "/imgs/post.png"
     },
     {
       "id": 2,
       "name": "",
       "price": 0,
-      "imgUrl": "/imgs/new-designs.png"
+      "imgUrl": "/imgs/newdesigns.png"
     }
   ]
