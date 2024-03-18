@@ -27,6 +27,20 @@
     flex-direction: row;
 }
 
+.navbar .weather{
+    display: flex;
+}
+
+.navbar .weather-icon{
+    display: flex;
+    margin: auto;
+}
+
+.navbar .weather-degrees{
+    display: flex;
+    margin: auto;
+}
+
 .navbar .navbar-end .user {
     display: flex;
     flex-direction: row;
