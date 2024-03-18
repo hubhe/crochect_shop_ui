@@ -7,14 +7,17 @@ import { GenericCarousel } from './GenericCarousel';
 import storeItems from '../../data/items.json';
 import slides from '../../data/slides.json';
 import ItemCard from './ItemCard';
+import { useNavigate } from 'react-router-dom';
 
 export const HomePage: FC = () => {
     const topItems = slides; 
 
+
+    const navigate = useNavigate();
     const items = storeItems;
     const onClickItem = (id: string) => {
         console.log(`Item clicked: ${id}`);
-        // Handle item click logic here
+        navigate(`/itemProfile/${id}`);    
     };
 
     const handleScroll = () => {
@@ -33,11 +36,13 @@ export const HomePage: FC = () => {
                 <div className="posts">
         {items.map((item, index) => (
             <ItemCard
-                key={item.id}
+            key={item.id}
+            id = {item.id}
               name={item.name}
               uploader={item.uploader}
               comments={item.comments.length}
               image_url={item.imgUrl}
+              onClickItem={onClickItem}
             />
         ))}
       </div>
