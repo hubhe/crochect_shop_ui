@@ -15,7 +15,7 @@ export const ItemDetails: FC<Props> = ({
     imgUrl,
     name,
     comments,
-    price,
+    description,
 }) => {
     const navigate = useNavigate();
     return (
@@ -27,7 +27,6 @@ export const ItemDetails: FC<Props> = ({
             <img src={imgUrl} />
             <h3>{name}</h3>
             <div className="details">
-                <span>Cost: {price}$</span>
             </div>
         </Card>
     );
