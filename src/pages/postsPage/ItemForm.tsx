@@ -1,21 +1,26 @@
 import './itemForm.css';
-import React, { FC, useState, useCallback, useEffect, useMemo } from 'react';
+import React, { FC, useState, useCallback, useEffect, useMemo, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import SendIcon from '@mui/icons-material/Send';
 import LoadingButton from '@mui/lab/LoadingButton';
-import { TextInput, PasswordInput, ImageInput, Carousel } from '../../ui';
+import { TextInput, PasswordInput, ImageInput, Carousel, Item } from '../../ui';
 import { GenericCarousel } from '../homePage/GenericCarousel';
 import storeItems from '../../data/items.json';
-
+import { AuthContext } from '../../Contexts';
+import { ItemsService } from '../../services';
+import { BaseItem } from '../../services/items';
 
 export interface FormProps {
     type: 'Create' | 'Edit';
-    onEdit: (formData: FormData) => Promise<void>;
+    onEdit: (_id: string, formData: FormData) => Promise<void>;
+    onSelectionChanged: (item: BaseItem | undefined) => void | undefined;
 }
 
-export const ItemForm: FC<FormProps> = ({ type, onEdit }) => {
-    const [name, setName] = useState<string>('');
-    const [description, setDescription] = useState<string>('');
+export const ItemForm: FC<FormProps> = ({ type, onEdit, onSelectionChanged }) => {
+    const { user } = useContext(AuthContext)
+    const [items, setItems] = useState<BaseItem[]>([])
+    const [name, setName] = useState<string | undefined>('');
+    const [description, setDescription] = useState<string | undefined>('');
     const [imageInfo, setImageInfo] = useState<File | null>(null);
     const [id, setItemID] = useState<string>('');
 
@@ -27,42 +32,47 @@ export const ItemForm: FC<FormProps> = ({ type, onEdit }) => {
     const handleUpdate = useCallback(async () => {
         setIsLoading(true);
         const formData: FormData = new FormData()
-        formData.append('description', description);
-        formData.append('name', name);
+        if (description)
+            formData.append('description', description);
+        if (name)
+            formData.append('name', name);
         if (isEdit)
             formData.append('_id', id);
         if (imageInfo) {
             formData.append('image', imageInfo, imageInfo?.name);
         }
-        await onEdit(formData);
+        await onEdit(id, formData);
         setIsLoading(false);
     }, [description, name, imageInfo]);
 
     useEffect(() => {
-        if (name.length === 0 || description.length === 0) 
+        if (!name?.length || !description?.length) 
+            return setIsValid(false);
+        if (name?.length === 0 || description?.length === 0) 
             return setIsValid(false);
         return setIsValid(true);
     }, [description, type, name]);
 
-    const items = storeItems;
+    useEffect(() => {
+        async function getItems() {
+            const x = await ItemsService.getAllUserItems();
+            setItems(x);
+        }
+        getItems()
+    }, [])
     const onClickItem = (id: string) => {
         console.log(`Item clicked: ${id}`);
         setItemID(id.toString());
-        // Handle item click logic here
-    };
+        const item = items.find(itm => itm._id === id)
+        setName(item?.name)
+        setDescription(item?.description)
+        onSelectionChanged(item)
+        };
 
     return (
         <div style={{ width: "100%" }}>
             <div className="item-form">
                 <h2>{isEdit ? 'Edit Item' : 'Create Item'}</h2>
-                {isEdit && (
-                    <TextInput
-                        title="Item ID"
-                        type="id"
-                        value={id}
-                        onChange={setItemID}
-                    />
-                )}
                 <TextInput title="Name" value={name} onChange={setName} />
                 <TextInput title="Description" value={description} onChange={setDescription} />
                 <ImageInput onChange={setImageInfo} />
