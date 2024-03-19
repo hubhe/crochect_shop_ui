@@ -25,7 +25,6 @@ export const ItemProfile: React.FC = () => {
     const [open, setOpen] = React.useState(true);
     const { user } = useContext(AuthContext);
     const [item, setItem] = useState<BaseItem>();
-    const [uploaders, setUploaders] = useState<Record<string, string>>({}); // Mapping of item ID to uploader
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -78,12 +77,12 @@ export const ItemProfile: React.FC = () => {
           <div style={{ height: '100%', overflowY: 'auto' }}>
             <div className="main-item-screen">
                 <div className="buy-item-title-div">
-                  <h1 className="buy-item-title">{`${item?.name} by`}</h1>
+                  <h1 className="buy-item-title">{`${item?.name}`}</h1>
                 </div>
                 <br/>
                 <div className='item-info'>
                   <img
-                    src={item?.imgUrl}
+                    src={`http://localhost:3000/public/${item?.imgUrl}`}
                     alt={item?.name}
                     className="item-image"
                   />
