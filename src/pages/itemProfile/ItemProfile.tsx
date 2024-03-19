@@ -2,51 +2,99 @@ import './ItemProfile.css';
 
 import {
     Badge,
+    CardContent,
     TextField,
+    Typography,
 } from '@mui/material';
 import SendIcon from '@mui/icons-material/Send';
 import React, { useCallback, useContext, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { Carousel } from '../../ui';
-import { useFetch } from '../../ui/hooks/useFetch';
 import Button from '@mui/material/Button';
-import { CommentService, ItemsService } from '../../services';
-import storeItems from '../../data/items.json';
+import { CommentService, ItemsService, UserService } from '../../services';
 import { AuthContext, ItemContext } from '../../Contexts';
 import Card from '@mui/material/Card';
-
+import { BaseItem } from '../../services/items';
+import {Comment} from '../../services/comments'
 
 export const ItemProfile: React.FC = () => {
-    const { id } = useParams();
-    const navigate = useNavigate();
-    const [expand, setExpand] = useState(false);
-    const [newComment, setNewComment] = useState('');
-    const [open, setOpen] = React.useState(true);
-  
-    // const {
-    //     value: item,
-    //     isLoading: loadingFullItem,
-    //     refetch,
-    // } = useFetch(async () => await ItemsService.getItemById(id!), undefined);
-    
-    const item = storeItems[Number(id) - 1];
+  const { id } = useParams();
+  const [expand, setExpand] = useState(false);
+  const [newComment, setNewComment] = useState('');
+  const [comments, setComments] = useState<Comment[]>();
+  const [open, setOpen] = React.useState(true);
+  const { user } = useContext(AuthContext);
+  const [item, setItem] = useState<BaseItem>();
+  const [userDisplayNames, setUserDisplayNames] = useState<{[userId: string]: string}>({});
+  const navigate = useNavigate();
 
-    const handleClick = () => {
-        setOpen(!open);
-    };
+  useEffect(() => {
+      const fetchData = async () => {
+          try {
+              const fetchedItem = await ItemsService.getItemById(id!);
+              setItem(fetchedItem.data);
+              const fetchedComments = await CommentService.getCommentsByItem(id!);
+              setComments(fetchedComments.data);
+              // Extract item IDs from fetched items
+              const itemIds = fetchedItem._id;
+          } catch (error) {
+              console.error('Error fetching items:', error);
+          }
+      };
+      fetchData();
+  }, []);
 
-    const onClick = () => {
-        setExpand(!expand);
-    };
+  useEffect(() => {
+      const fetchUserDisplayNames = async () => {
+          const displayNames: {[userId: string]: string} = {};
+          if (comments) {
+              for (const comment of comments) {
+                  const displayName = await getUserDisplayName(comment.user_id);
+                  displayNames[comment.user_id] = displayName;
+              }
+              setUserDisplayNames(displayNames);
+          }
+      };
+      fetchUserDisplayNames();
+  }, [comments]);
 
-    const onCommentPublish = useCallback(async (formData: FormData) => {
-        try {
-            const response = await CommentService.createComment(formData);
-            console.log('Submited comment: ', response);
-        } catch (e) {
-            console.log('Could not upload', e);
-        }
-    }, []); 
+  const handleClick = () => {
+      setOpen(!open);
+  };
+
+  const onClick = async () => {
+      try {
+          const formData = new FormData();
+          formData.append('comment', newComment);
+          formData.append('user_id', user?._id!);
+          formData.append('item_id', id!)
+          // Call the onCommentPublish function with the comment data
+          await onCommentPublish(formData);
+          // Clear the newComment state after submission
+          setNewComment('');
+          window.location.reload();
+      } catch (error) {
+          console.error('Error publishing comment:', error);
+      }
+  };
+
+  const onCommentPublish = useCallback(async (formData: FormData) => {
+      try {
+          const response = await CommentService.createComment(formData);
+          console.log('Submitted comment: ', response);
+      } catch (e) {
+          console.log('Could not upload', e);
+      }
+  }, []); 
+
+  const getUserDisplayName = async (userId: string) => {
+      try {
+          const user = await UserService.getUserNameById(userId);
+          return user.data.name;
+      } catch (error) {
+          console.error('Error fetching user:', error);
+          return 'Unknown User';
+      }
+  };
 
     return (
         <>
@@ -54,12 +102,12 @@ export const ItemProfile: React.FC = () => {
           <div style={{ height: '100%', overflowY: 'auto' }}>
             <div className="main-item-screen">
                 <div className="buy-item-title-div">
-                  <h1 className="buy-item-title">{`${item?.name} by`}</h1>
+                  <h1 className="buy-item-title">{`${item?.name}`}</h1>
                 </div>
                 <br/>
                 <div className='item-info'>
                   <img
-                    src={item?.imgUrl}
+                    src={`http://localhost:3000/public/${item?.imgUrl}`}
                     alt={item?.name}
                     className="item-image"
                   />
@@ -89,23 +137,34 @@ export const ItemProfile: React.FC = () => {
                   variant="contained"
                   endIcon={<SendIcon />}
                   className="submit-new-comment-btn"
-                  onClick={handleClick}
+                  onClick={onClick} // Call onClick when the button is clicked
                 >
                   Submit
                 </Button>
               </div>
               <div className="comments">
-                {item?.comments && item?.comments.length !== 0 ? (
-                  item?.comments.map((comment: any, i: any) => (
-                    <div key={i} className="written-comments">
+    {comments && comments.length !== 0 ? (
+        comments.map((comment: any, i: any) => (
+            <Card key={i} className="comment-card">
+                <CardContent>
+                    <div className='comment-content'>
+                        <div className='user-name'>
+                            {userDisplayNames[comment.user_id]}
+                        </div>
+                        <Typography variant="body1" component="p">
+                            {comment.comment}
+                        </Typography>
                     </div>
-                  ))
-                ) : (
-                  <div>
-                    Pretty empty here! <br /> Be the first to write a comment!
-                  </div>
-                )}
-              </div>
+                </CardContent>
+            </Card>
+        ))
+    ) : (
+        <div>
+            Pretty empty here! <br /> Be the first to write a comment!
+        </div>
+    )}
+</div>
+
             </div>
           </div>
         </>

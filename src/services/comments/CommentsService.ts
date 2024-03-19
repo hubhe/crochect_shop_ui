@@ -8,4 +8,13 @@ export async function createComment(formData: FormData): Promise<any> {
     } catch (error) {
       return handleAuthError(error);
     }
+}
+
+export async function getCommentsByItem(id: string): Promise<any> {
+  try {
+    const response = await userFetch.get<RegisterRensponse>(`/comment/by_item/${id}`);
+    return response;
+  } catch (error) {
+    return handleAuthError(error);
   }
+}

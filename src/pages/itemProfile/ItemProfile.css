@@ -1,37 +1,6 @@
-.main-item-screen {
-    display: flex !important;
-    align-items: stretch;
-    flex-wrap: wrap; /* Allow items to wrap to the next row */
-    justify-content: space-between; /* Distribute items evenly */
-    padding: 10px;
-}
-
-.genral-item-info {
-    margin: 0 20px;
-}
-
-
-.bottom-profile {
-    display: grid;
-    grid-template-columns: repeat(1, minmax(0, 1fr));
-    gap: 1em;
-    padding: 0.5em;
-    align-items: start;
-    margin-top: auto; /* Adjust the margin to push it upwards */
-}
-
-.item-info {
-    margin: auto;
-    align-items: center;
-}
-
-.item-info h2 {
-    margin: auto;
-}
-
 .item-card {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     align-items: stretch;
     min-width: 80%;
     position: relative;
@@ -39,8 +8,9 @@
 
 .item-info img {
     object-fit: cover;
-    width: 100%;
-    height: 16em;
+    width: 100%; /* Set the width to 100% to fit its container */
+    max-width: 300px; /* Set a maximum width for the image */
+    height: auto; /* Maintain aspect ratio */
 }
 
 .buy-item-title {
@@ -48,43 +18,25 @@
     margin-left: auto;
 }
 
-
-.buy-item-btn {
-    padding-bottom: 0.5em;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    font-size: 30px;
-    color: #ec75a9;
+.comment-content {
+    position: relative;
 }
 
-.new-comment-content {
-    margin: 1em !important;
-    width: 90%;
-}
-
-.submit-new-comment-btn {
-    margin-top: 1em !important;
-    background: #ec75a9;
-}
-
-.written-comments {
-    margin-bottom: 1em;
-    width: 90%;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.toggle-replays {
-    margin-bottom: 1em !important;
-}
-
-.written-comments-name {
+.user-name {
+    font-size: 12px;
+    position: absolute;
     top: 0;
+    left: 0;
+    margin: 4px;
 }
 
-.written-comments-content {
-    text-align: center;
+.bottom-profile {
+    display: grid;
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+    gap: 1em;
+    padding: 0.5em;
+    align-items: start;
+    margin-top: auto;
 }
 
 .item-comments {
@@ -93,16 +45,32 @@
 }
 
 .comments {
-    margin-top: 1em !important;
-    flex: 1 1 0px !important;
+    margin-top: 1em;
     font-size: 1.5em;
 }
 
-.item-info {
-    width: auto;
+.comment-card {
+    margin-bottom: 1em;
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
 }
 
-.item-img {
-    width: 100%; /* Ensure the image fills the entire width of the card */
-    height: auto; /* Maintain aspect ratio */
-  }
+.comment-card-content {
+    text-align: center;
+}
+
+.new-comment-content {
+    margin: 1em;
+    width: 90%;
+}
+
+.submit-new-comment-btn {
+    margin-top: 1em;
+    background: #ec75a9;
+}
+
+.write-your-comment {
+    margin-bottom: 1em;
+}
+
