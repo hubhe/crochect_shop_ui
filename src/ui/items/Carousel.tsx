@@ -21,7 +21,6 @@ interface Props {
     className?: string;
     baseImageUrl: string,
     itemsInOneSlider?: number;
-    baseImageUrl: string,
     autoSlide?: boolean;
     isLoading?: boolean;
     randomColors?: boolean;
@@ -38,7 +37,6 @@ export const Carousel: FC<Props> = ({
     isLoading,
     className,
     randomColors,
-    baseImageUrl = '',
     onClickItem,
     baseImageUrl = '',
 }) => {
