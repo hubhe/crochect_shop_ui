@@ -125,7 +125,7 @@ export const Carousel: FC<Props> = ({
                                     key={item._id}
                                     index={index}
                                     {...item}
-                                    imgUrl={`http://localhost:3000/public/${item.imgUrl}`}
+                                    imgUrl={`http://localhost:4000/public/${item.imgUrl}`}
                                     width={100 / itemsInOneSlider}
                                     onClick={onClickItem}
                                     randomColors={randomColors}

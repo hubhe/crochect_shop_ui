@@ -55,7 +55,7 @@ const Page: FC<PageProps> = (formProps) => {
 
     const onSelectionChanged = (item: BaseItem | undefined) => {
         if (item) {
-            setImgSrc(`http://localhost:3000/public/${item.imgUrl}`)
+            setImgSrc(`http://localhost:4000/public/${item.imgUrl}`)
         } else {
             setImgSrc(undefined)
         }

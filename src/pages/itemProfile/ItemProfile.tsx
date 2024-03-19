@@ -107,7 +107,7 @@ export const ItemProfile: React.FC = () => {
                 <br/>
                 <div className='item-info'>
                   <img
-                    src={`http://localhost:3000/public/${item?.imgUrl}`}
+                    src={`http://localhost:4000/public/${item?.imgUrl}`}
                     alt={item?.name}
                     className="item-image"
                   />

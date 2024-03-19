@@ -58,7 +58,7 @@ export const HomePage: FC = () => {
                         name={item.name}
                         uploader={uploaders[item._id]} // Retrieve uploader information from the mapping
                         comments={item.comments ? item.comments.length : 0}
-                        image_url={`http://localhost:3000/public/${item.imgUrl}`}
+                        image_url={`http://localhost:4000/public/${item.imgUrl}`}
                         onClickItem={onClickItem}
                     />
                 ))}
