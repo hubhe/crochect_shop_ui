@@ -2,27 +2,28 @@ import './ItemProfile.css';
 
 import {
     Badge,
+    CardContent,
     TextField,
+    Typography,
 } from '@mui/material';
 import SendIcon from '@mui/icons-material/Send';
 import React, { useCallback, useContext, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { Carousel } from '../../ui';
-import { useFetch } from '../../ui/hooks/useFetch';
 import Button from '@mui/material/Button';
 import { CommentService, ItemsService } from '../../services';
-import storeItems from '../../data/items.json';
 import { AuthContext, ItemContext } from '../../Contexts';
 import Card from '@mui/material/Card';
 import { BaseItem } from '../../services/items';
+import {Comment} from '../../services/comments'
 
 
 export const ItemProfile: React.FC = () => {
     const { id } = useParams();
     const [expand, setExpand] = useState(false);
     const [newComment, setNewComment] = useState('');
+    const [comments, setComments] = useState<Comment[]>();
     const [open, setOpen] = React.useState(true);
-  
+    const { user } = useContext(AuthContext);
     const [item, setItem] = useState<BaseItem>();
     const [uploaders, setUploaders] = useState<Record<string, string>>({}); // Mapping of item ID to uploader
     const navigate = useNavigate();
@@ -32,7 +33,8 @@ export const ItemProfile: React.FC = () => {
             try {
                 const fetchedItem = await ItemsService.getItemById(id!);
                 setItem(fetchedItem.data);
-
+                const fetchedComments = await CommentService.getCommentsByItem(id!);
+                setComments(fetchedComments.data);
                 // Extract item IDs from fetched items
                 const itemIds = fetchedItem._id;
             } catch (error) {
@@ -46,8 +48,19 @@ export const ItemProfile: React.FC = () => {
         setOpen(!open);
     };
 
-    const onClick = () => {
-        setExpand(!expand);
+    const onClick = async () => {
+        try {
+            const formData = new FormData();
+            formData.append('comment', newComment);
+            formData.append('user_id', user?._id!);
+            formData.append('item_id', id!)
+            // Call the onCommentPublish function with the comment data
+            await onCommentPublish(formData);
+            // Clear the newComment state after submission
+            setNewComment('');
+        } catch (error) {
+            console.error('Error publishing comment:', error);
+        }
     };
 
     const onCommentPublish = useCallback(async (formData: FormData) => {
@@ -100,23 +113,28 @@ export const ItemProfile: React.FC = () => {
                   variant="contained"
                   endIcon={<SendIcon />}
                   className="submit-new-comment-btn"
-                  onClick={handleClick}
+                  onClick={onClick} // Call onClick when the button is clicked
                 >
                   Submit
                 </Button>
               </div>
               <div className="comments">
-                {item?.comments && item?.comments.length !== 0 ? (
-                  item?.comments.map((comment: any, i: any) => (
-                    <div key={i} className="written-comments">
+                        {comments && comments.length !== 0 ? (
+                            comments.map((comment: any, i: any) => (
+                                <Card key={i} className="comment-card">
+                                    <CardContent>
+                                        <Typography variant="body1" component="p">
+                                            {comment.comment}
+                                        </Typography>
+                                    </CardContent>
+                                </Card>
+                            ))
+                        ) : (
+                            <div>
+                                Pretty empty here! <br /> Be the first to write a comment!
+                            </div>
+                        )}
                     </div>
-                  ))
-                ) : (
-                  <div>
-                    Pretty empty here! <br /> Be the first to write a comment!
-                  </div>
-                )}
-              </div>
             </div>
           </div>
         </>

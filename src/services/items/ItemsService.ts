@@ -24,7 +24,7 @@ export async function updateItem(data: FormData): Promise<boolean> {
   
   export async function createItem(formData: FormData): Promise<any> {
     try {
-      const response = await userFetch.post('/items', formData);
+      const response = await userFetch.post('/items', formData, {headers: {'Content-Type': 'multipart/form-data'}});
       return response;
     } catch (error) {
       return handleAuthError(error);
