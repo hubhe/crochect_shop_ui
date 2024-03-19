@@ -60,6 +60,7 @@ export const ItemForm: FC<FormProps> = ({ type, onEdit, onSelectionChanged }) =>
             navigate('/');
         } catch (e) {
             console.log('Delete item failed', e);
+            setIsLoading(false);
         }
        
     }, []);
