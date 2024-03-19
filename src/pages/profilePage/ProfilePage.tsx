@@ -40,7 +40,7 @@ const Page: FC<FormProps> = (formProps) => {
             <Card className="profile-card">
                 <ProfileForm {...formProps} />
                 <div className="right-side">
-                    <img className="profile-background-img" src={`http://localhost:3000/public/${user?.imgUrl}`} />
+                    <img className="profile-background-img" src={`http://localhost:4000/public/${user?.imgUrl}`} />
                 </div>
                 <AppLogo className="small-app-logo" small />
             </Card>

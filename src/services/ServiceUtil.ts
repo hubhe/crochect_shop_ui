@@ -1,10 +1,10 @@
 import axios, { AxiosError } from 'axios';
 
 const serverFetch = axios.create({
-    baseURL: 'http://localhost:3000/'
+    baseURL: 'http://localhost:4000/'
 })
 const userFetch = axios.create({
-    baseURL: 'http://localhost:3000/'
+    baseURL: 'http://localhost:4000/'
 })
 
 userFetch.interceptors.request.use(
