@@ -33,7 +33,7 @@ export async function updateItem(data: FormData): Promise<boolean> {
 
   export async function getItemById(_id:string): Promise<any> {
     try {
-      const response = await userFetch.get<RegisterRensponse>(`/item/${_id}`);
+      const response = await userFetch.get<RegisterRensponse>(`/items/${_id}`);
       return response;
     } catch (error) {
       return handleAuthError(error);

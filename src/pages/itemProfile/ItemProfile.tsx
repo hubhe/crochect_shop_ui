@@ -14,22 +14,33 @@ import { CommentService, ItemsService } from '../../services';
 import storeItems from '../../data/items.json';
 import { AuthContext, ItemContext } from '../../Contexts';
 import Card from '@mui/material/Card';
+import { BaseItem } from '../../services/items';
 
 
 export const ItemProfile: React.FC = () => {
     const { id } = useParams();
-    const navigate = useNavigate();
     const [expand, setExpand] = useState(false);
     const [newComment, setNewComment] = useState('');
     const [open, setOpen] = React.useState(true);
   
-    // const {
-    //     value: item,
-    //     isLoading: loadingFullItem,
-    //     refetch,
-    // } = useFetch(async () => await ItemsService.getItemById(id!), undefined);
-    
-    const item = storeItems[Number(id) - 1];
+    const [item, setItem] = useState<BaseItem>();
+    const [uploaders, setUploaders] = useState<Record<string, string>>({}); // Mapping of item ID to uploader
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const fetchedItem = await ItemsService.getItemById(id!);
+                setItem(fetchedItem.data);
+
+                // Extract item IDs from fetched items
+                const itemIds = fetchedItem._id;
+            } catch (error) {
+                console.error('Error fetching items:', error);
+            }
+        };
+        fetchData();
+    }, []);
 
     const handleClick = () => {
         setOpen(!open);
