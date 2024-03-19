@@ -52,6 +52,7 @@ export const ItemForm: FC<FormProps> = ({ type, onEdit, onSelectionChanged }) =>
     }, [description, name, imageInfo]);
 
     const onClick = useCallback(async () => {
+        if(id){
         setIsLoading(true);
         try {
             const item = await ItemsService.deleteItem(id);
@@ -62,6 +63,7 @@ export const ItemForm: FC<FormProps> = ({ type, onEdit, onSelectionChanged }) =>
             console.log('Delete item failed', e);
             setIsLoading(false);
         }
+    }
        
     }, []);
 
