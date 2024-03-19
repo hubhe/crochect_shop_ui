@@ -50,7 +50,7 @@ export const Navbar = () => {
                     <div className="navbar-end">
                         <NavbarMenu>
                             <div className="user">
-                                <Avatar className="avatar" src={`http://localhost:4000/public/${user.imgUrl}`} />
+                                <Avatar className="avatar" src={`http://node51.cs.colman.ac.il:4000/public/${user.imgUrl}`} />
                                 <span>{user.name}</span>
                             </div>
                         </NavbarMenu>
