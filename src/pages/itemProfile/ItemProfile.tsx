@@ -71,6 +71,7 @@ export const ItemProfile: React.FC = () => {
           await onCommentPublish(formData);
           // Clear the newComment state after submission
           setNewComment('');
+          window.location.reload();
       } catch (error) {
           console.error('Error publishing comment:', error);
       }
