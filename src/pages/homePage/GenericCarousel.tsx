@@ -25,6 +25,7 @@ export const GenericCarousel: FC<GenericCarouselProps> = ({ type, items, isLoadi
             isLoading={isLoading}
             randomColors
             onClickItem={onClick}
+            baseImageUrl=''
         />
     );
 };

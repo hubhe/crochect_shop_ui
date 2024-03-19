@@ -20,6 +20,7 @@ interface Props {
     title: React.ReactNode;
     className?: string;
     itemsInOneSlider?: number;
+    baseImageUrl: string,
     autoSlide?: boolean;
     isLoading?: boolean;
     randomColors?: boolean;
@@ -37,6 +38,7 @@ export const Carousel: FC<Props> = ({
     className,
     randomColors,
     onClickItem,
+    baseImageUrl = '',
 }) => {
     const [currentSlide, setCurrentSlide] = useState(0);
     const [nextSlide, setNextSlide] = useState(-1);
@@ -125,7 +127,7 @@ export const Carousel: FC<Props> = ({
                                     key={item._id}
                                     index={index}
                                     {...item}
-                                    imgUrl={`http://localhost:3000/public/${item.imgUrl}`}
+                                    imgUrl={`${baseImageUrl}/${item.imgUrl}`}
                                     width={100 / itemsInOneSlider}
                                     onClick={onClickItem}
                                     randomColors={randomColors}
