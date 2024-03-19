@@ -19,15 +19,15 @@ export async function register(formData: FormData): Promise<any> {
 
 export async function registerGoogle(credentialResponse: CredentialResponse): Promise<any> {
     return new Promise<User>((resolve, reject) => {
-        console.log("googleSignin ...")
+        console.log("googleSignin ...");
         serverFetch.post("/auth/google", credentialResponse).then((response) => {
-            console.log(response)
+            console.log(response);
             localStorage.setItem('refreshToken', response.data.refreshToken);
             localStorage.setItem('accessToken', response.data.accessToken);
-            resolve(response.data.user)
+            resolve(response.data.user);
         }).catch((error) => {
-            console.log(error)
-            reject(error)
+            console.log(error);
+            reject(error);
         })
     })
   }
@@ -64,7 +64,7 @@ export async function signOut(): Promise<string> {
             localStorage.removeItem('refreshToken');
             localStorage.removeItem('accessToken');
             console.log(response.data);
-          })
+          });
       return 'User signed out successfully';
     } catch (error) {
       return 'An error occurred during sign out';
@@ -75,6 +75,6 @@ export async function signOut(): Promise<string> {
 export async function getActiveUser(): Promise<User | null> {
     if (!localStorage.getItem('accessToken'))
         return null;
-    const res = await userFetch.get('/user')
-    return res.data.user
+    const res = await userFetch.get('/user');
+    return res.data.user;
 } 

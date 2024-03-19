@@ -42,24 +42,25 @@ export async function updateItem(data: FormData): Promise<boolean> {
 
   export async function getAllItems(): Promise<BaseItem[]> {
     try {
-      const res = await userFetch.get('/items')
-      return res.data
+      const res = await userFetch.get('/items');
+      return res.data;
     } catch (error) {
       handleAuthError(error);
-      return []
+      return [];
     }
 
   }
  
-  export async function getAllUploaders(items: String[]) {
+  export async function getAllUploaders(items: string[]): Promise<Record<string, string>> {
     try {
-      const res = await userFetch.get('/items/uploaders', {
-        params: {items}
-      })
-      return res.data
+        const res = await userFetch.get('/items/uploaders', {
+            params: { items }
+        });
+        return res.data;
     } catch (error) {
-      handleAuthError(error);
-      return []
+        handleAuthError(error);
+        return {};
     }
-  }
+}
+
  
