@@ -1,5 +1,6 @@
 import { handleAuthError, userFetch } from "../ServiceUtil";
 import { RegisterRensponse } from "../auth/types";
+import { BaseItem } from "./types";
 
 
 export async function updateItem(data: FormData): Promise<boolean> {
@@ -10,7 +11,7 @@ export async function updateItem(data: FormData): Promise<boolean> {
             'Content-Type': 'application/json'
         };
   
-        const response = await userFetch.put(`/item/`, data, { headers });
+        const response = await userFetch.put(`/items/`, data, { headers });
   
         const success = response.data.success;
   
@@ -23,16 +24,7 @@ export async function updateItem(data: FormData): Promise<boolean> {
   
   export async function createItem(formData: FormData): Promise<any> {
     try {
-      const response = await userFetch.post<RegisterRensponse>('/item', formData);
-      return response;
-    } catch (error) {
-      return handleAuthError(error);
-    }
-  }
-
-  export async function getItems(): Promise<any> {
-    try {
-      const response = await userFetch.get<RegisterRensponse>('/item');
+      const response = await userFetch.post('/items', formData);
       return response;
     } catch (error) {
       return handleAuthError(error);
@@ -47,3 +39,27 @@ export async function updateItem(data: FormData): Promise<boolean> {
       return handleAuthError(error);
     }
   }
+
+  export async function getAllItems(): Promise<BaseItem[]> {
+    try {
+      const res = await userFetch.get('/items')
+      return res.data
+    } catch (error) {
+      handleAuthError(error);
+      return []
+    }
+
+  }
+ 
+  export async function getAllUploaders(items: String[]) {
+    try {
+      const res = await userFetch.get('/items/uploaders', {
+        params: {items}
+      })
+      return res.data
+    } catch (error) {
+      handleAuthError(error);
+      return []
+    }
+  }
+ 

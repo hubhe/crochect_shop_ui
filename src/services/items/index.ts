@@ -1,2 +1,2 @@
-export * from './ItemsService';
 export * from './types';
+export * from './ItemsService';

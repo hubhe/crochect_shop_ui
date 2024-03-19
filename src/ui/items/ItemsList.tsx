@@ -21,7 +21,7 @@ export const ItemsList: FC<Props> = ({ items, title, isLoading, onScroll }) => {
             {title && <h1>{title}</h1>}
             <div className="items-list">
                 {items.map((item, index) => (
-                    <ItemDetails key={`${item.id}|${index}`} {...item} />
+                    <ItemDetails key={`${item._id}|${index}`} {...item} />
                 ))}
             </div>
             <LoadingButton

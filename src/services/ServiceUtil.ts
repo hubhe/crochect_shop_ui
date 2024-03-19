@@ -11,6 +11,7 @@ userFetch.interceptors.request.use(
     config => {
         config.headers['Authorization'] = `Bearer ${localStorage.getItem('accessToken')}` || "";
         config.headers['refresh_token'] = localStorage.getItem('refreshToken') || "";
+        config.headers['Content-Type'] = 'application/json';
         return config
     },
     error => {

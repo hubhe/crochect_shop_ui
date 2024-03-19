@@ -7,6 +7,7 @@ import { CredentialResponse, GoogleLogin } from '@react-oauth/google';
 import { TextInput, PasswordInput, ImageInput } from '../../ui';
 
 
+
 const MAX_PASSWORD_DIGITS = 8;
 
 export interface FormProps {

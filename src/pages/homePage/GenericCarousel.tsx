@@ -6,11 +6,11 @@ interface GenericCarouselProps {
     type: string;
     items: any[]; // You may need to adjust the type according to your data structure
     isLoading?: boolean;
-    onClickItem?: (id: number) => void;
+    onClickItem?: (id: string) => void;
 }
 
 export const GenericCarousel: FC<GenericCarouselProps> = ({ type, items, isLoading, onClickItem }) => {
-    const onClick = (id: number) => {
+    const onClick = (id: string) => {
         if (onClickItem) {
             onClickItem(id);
         }

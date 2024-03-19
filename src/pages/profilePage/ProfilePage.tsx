@@ -33,7 +33,6 @@ export const ProfilePage: FC = () => {
 };
 
 const Page: FC<FormProps> = (formProps) => {
-    const navigate = useNavigate();
     const { user } = useContext(AuthContext);
 
     return (

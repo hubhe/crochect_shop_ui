@@ -7,7 +7,7 @@ import { AuthContext } from '../../Contexts';
 
 export const NavbarMenu: FC<PropsWithChildren> = ({ children }) => {
     const navigate = useNavigate();
-    const { setUser } = useContext(AuthContext)
+    const { user, setUser } = useContext(AuthContext)
 
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
     const open = Boolean(anchorEl);
@@ -35,11 +35,8 @@ export const NavbarMenu: FC<PropsWithChildren> = ({ children }) => {
                         <span>Edit Profile</span>
                     </MenuItem>
                     <MenuItem onClick={() => onClose('/post/create')}>
-                            <span>Create Item</span>
-                        </MenuItem><MenuItem onClick={() => onClose('/post/edit')}>
-                                <span>Edit Item</span>
-                            </MenuItem>
-
+                            <span>Post Plushie</span>
+                    </MenuItem>
                     <MenuItem onClick={signOut}>
                         <span>Sign Out</span>
                     </MenuItem>
@@ -49,4 +46,3 @@ export const NavbarMenu: FC<PropsWithChildren> = ({ children }) => {
         </>
     );
 };
-

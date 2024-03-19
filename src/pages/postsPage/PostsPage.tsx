@@ -1,4 +1,4 @@
-import './AdminPage.css';
+import './PostsPage.css';
 
 import Card from '@mui/material/Card';
 import { FC, useCallback, useEffect } from 'react';
@@ -13,7 +13,7 @@ import { ItemsService } from '../../services';
 export const CreateItem: FC = () => {
     const navigate = useNavigate();
 
-    const onCreate = useCallback(async (formData: FormData) => {
+    const onCreate = async (formData: FormData) => {
         try {
             const item = await ItemsService.createItem(formData);
             console.log('Created item successfully: ', item);
@@ -21,7 +21,7 @@ export const CreateItem: FC = () => {
         } catch (e) {
             console.log('Failed creating item', e);
         }
-    }, []);
+    }
 
     return <Page type="Create" onEdit={onCreate} />;
 };

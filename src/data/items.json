@@ -1,68 +1,59 @@
 [
     {
-      "id": "1",
+      "_id": "1",
       "name": "Rainbow Bunny",
-      "uploader": "gever",
       "comments": ["hi", "hello", "wassup"],
       "imgUrl": "/imgs/rosie.jpg",
       "description": "Best product ever"
     },
     {
-      "id": "2",
+      "_id": "2",
       "name": "Chick",
-      "uploader": "gever",
       "comments": [],
       "description": "Best product ever",
       "imgUrl": "/imgs/chicks.jpg"
     },
     {
-      "id": "3",
+      "_id": "3",
       "name": "Mini Cow",
-      "uploader": "gever",
       "comments": [],
       "description": "Best product ever",
       "imgUrl": "/imgs/mini-cow.jpg"
     },
     {
-      "id": "4",
+      "_id": "4",
       "name": "Polar Bear",
-      "uploader": "gever",
       "comments": [],
       "imgUrl": "/imgs/polar-bears.jpg"
     },
     {
-      "id": "5",
+      "_id": "5",
       "name": "Succulent",
       "comments": [],
-      "uploader": "gever",
       "imgUrl": "/imgs/succulent.jpg"
     },
     {
-      "id": "6",
+      "_id": "6",
       "name": "Cactus",
       "comments": [],
-      "uploader": "gever",
       "imgUrl": "/imgs/cactus.jpg"
     },
     {
-      "id": "7",
+      "_id": "7",
       "name": "Perry the Platypus",
       "price": 20,
-      "uploader": "gever",
       "comments": [],
       "imgUrl": "/imgs/perry.jpg"
     },
     {
-      "id": "8",
+      "_id": "8",
       "name": "Snake",
       "comments": [],
-      "imgUrl": "/imgs/snake.jpg",
-      "uploader": "gever"
+      "imgUrl": "/imgs/snake.jpg"
     },
     {
-      "id": "9",
+      "_id": "9",
       "name": "Cat",
-      "uploader": "gever",
       "comments": [],
       "imgUrl": "/imgs/cat.jpg"
     }

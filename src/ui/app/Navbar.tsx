@@ -1,4 +1,5 @@
 import './Navbar.css';
+
 import { Link, Outlet, useNavigate } from 'react-router-dom';
 import { Avatar } from '@mui/material';
 import React, { useContext, useEffect, useState } from 'react';
@@ -42,7 +43,7 @@ export const Navbar = () => {
                     <div className='weather-degrees'>
                     {temp !== null ? `${temp} °C` : 'Loading...'}
                     </div>
-                </div>                
+                </div>    
                 {!user ? (
                     <Link to="/login">Login</Link>
                 ) : (

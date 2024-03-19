@@ -1,5 +1,4 @@
 import React, { FC } from 'react';
-import { ItemsList } from '../../ui/items/ItemsList';
 import { Carousel } from '../../ui';
 import { GenericCarousel } from './GenericCarousel';
 
@@ -36,10 +35,10 @@ export const HomePage: FC = () => {
                 <div className="posts">
         {items.map((item, index) => (
             <ItemCard
-            key={item.id}
-            id = {item.id}
+            key={item._id}
+            id = {item._id}
               name={item.name}
-              uploader={item.uploader}
+              uploader={"asdasd"}
               comments={item.comments.length}
               image_url={item.imgUrl}
               onClickItem={onClickItem}

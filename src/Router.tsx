@@ -4,7 +4,7 @@ import { BrowserRouter } from 'react-router-dom';
 import React from 'react';
 
 import { HomePage } from './pages/homePage/HomePage';
-import { CreateItem,EditItem } from './pages/adminPage/AdminPage';
+import { CreateItem,EditItem } from './pages/postsPage/PostsPage';
 import { LoginPage, SignUpPage } from './pages/Login/LoginPage';
 import { PageNotFound } from './pages/PageNotFound';
 import { Navbar } from './ui';

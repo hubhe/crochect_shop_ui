@@ -1,9 +1,8 @@
 import './profilePage.css';
-import React, { FC, useState, useCallback, useEffect, useMemo, ChangeEvent, useContext } from 'react';
+import React, { FC, useState, useCallback, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import SendIcon from '@mui/icons-material/Send';
 import LoadingButton from '@mui/lab/LoadingButton';
-import { CredentialResponse, GoogleLogin } from '@react-oauth/google';
 import { TextInput, PasswordInput, ImageInput } from '../../ui';
 import { AuthContext } from '../../Contexts';
 

@@ -8,11 +8,11 @@ import classNames from 'classnames';
 import React from 'react';
 
 export interface Item {
-    id: number;
+    _id: string;
     name: string;
-    price: number;
+    description?: string;
     imgUrl: string;
-    onClick?: (id: number) => void;
+    onClick?: (id: string) => void;
 }
 
 interface Props {
@@ -23,7 +23,7 @@ interface Props {
     autoSlide?: boolean;
     isLoading?: boolean;
     randomColors?: boolean;
-    onClickItem?: (id: number) => void;
+    onClickItem?: (id: string) => void;
 }
 
 type SlideDirection = 'prev' | 'next';
@@ -122,7 +122,7 @@ export const Carousel: FC<Props> = ({
                         <div className={getSlideClassNames(index)} key={index}>
                             {items.map((item, index) => (
                                 <CarouselItem
-                                    key={item.id}
+                                    key={item._id}
                                     index={index}
                                     {...item}
                                     width={100 / itemsInOneSlider}
@@ -187,21 +187,21 @@ type CarouselItemProps = Item & {
 
 const CarouselItem: FC<CarouselItemProps> = ({
     width,
-    id,
+    _id,
     name,
     index,
     imgUrl,
     randomColors,
     onClick,
 }) => {
-    const handleClick = useCallback(() => onClick?.(id), [id, onClick]);
+    const handleClick = useCallback(() => onClick?.(_id), [_id, onClick]);
 
     return (
         <div
             className={classNames('carousel-item', { click: !!onClick })}
             onClick={handleClick}
             style={{ width: `${width}%` }}
-            key={id}
+            key={_id}
         >
             <h2
                 className="item-name"
