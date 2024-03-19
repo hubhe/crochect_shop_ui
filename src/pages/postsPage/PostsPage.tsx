@@ -41,7 +41,7 @@ export const EditItem: FC = () => {
     }, []); 
 
     return (
-        <Page type="Edit" onEdit={onEdit}/>
+        <Page type="Edit" onEdit={onEdit} />
     );
 };
 

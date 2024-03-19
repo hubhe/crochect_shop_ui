@@ -11,6 +11,15 @@ export async function updateItem(_id: string, formData: FormData): Promise<any> 
     return handleAuthError(error);
   }
   }
+
+  export async function deleteItem(_id: string): Promise<any> {
+    try {
+      const response = await userFetch.delete(`/items/item/${_id}`, {headers: {'Content-Type': 'multipart/form-data'}});
+      return response;
+    } catch (error) {
+      return handleAuthError(error);
+    }
+    }
   
   export async function createItem(formData: FormData): Promise<any> {
     try {

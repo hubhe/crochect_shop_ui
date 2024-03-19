@@ -9,6 +9,11 @@ import storeItems from '../../data/items.json';
 import { AuthContext } from '../../Contexts';
 import { ItemsService } from '../../services';
 import { BaseItem } from '../../services/items';
+import { Button } from '@mui/material';
+import { Delete } from '@mui/icons-material';
+import { useNavigate } from 'react-router-dom';
+
+
 
 export interface FormProps {
     type: 'Create' | 'Edit';
@@ -28,6 +33,7 @@ export const ItemForm: FC<FormProps> = ({ type, onEdit, onSelectionChanged }) =>
     const [isLoading, setIsLoading] = useState<boolean>(false);
 
     const isEdit = useMemo(() => type === 'Edit', [type]);
+    const navigate = useNavigate();
 
     const handleUpdate = useCallback(async () => {
         setIsLoading(true);
@@ -44,6 +50,19 @@ export const ItemForm: FC<FormProps> = ({ type, onEdit, onSelectionChanged }) =>
         await onEdit(id, formData);
         setIsLoading(false);
     }, [description, name, imageInfo]);
+
+    const onClick = useCallback(async () => {
+        setIsLoading(true);
+        try {
+            const item = await ItemsService.deleteItem(id);
+            setIsLoading(false);
+            console.log('Deleted item successfully: ', item);
+            navigate('/');
+        } catch (e) {
+            console.log('Delete item failed', e);
+        }
+       
+    }, []);
 
     useEffect(() => {
         if (!name?.length || !description?.length) 
@@ -89,9 +108,18 @@ export const ItemForm: FC<FormProps> = ({ type, onEdit, onSelectionChanged }) =>
                 </LoadingButton>
                 <div>
                     {isEdit ? (
-                        <span>
+                        <><span>
                             Would like to add new item? <Link to="/post/create">Create</Link>
                         </span>
+                        <br/>
+                        <Button
+                        variant="contained"
+                        endIcon={<Delete />}
+                        className="delete-item-btn"
+                        onClick={onClick} // Call onClick when the button is clicked
+                        >
+                        Delete Item
+                        </Button></>
                     ) : (
                         <span>
                             Would like to edit an existing item? <Link to="/post/edit">Edit</Link>
