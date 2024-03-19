@@ -1,10 +1,10 @@
 import axios, { AxiosError } from 'axios';
 
 const serverFetch = axios.create({
-    baseURL: 'http://node51.cs.colman.ac.il:4000/'
+    baseURL: 'https://node51.cs.colman.ac.il:4000/'
 })
 const userFetch = axios.create({
-    baseURL: 'http://node51.cs.colman.ac.il:4000/'
+    baseURL: 'https://node51.cs.colman.ac.il:4000/'
 })
 
 userFetch.interceptors.request.use(
