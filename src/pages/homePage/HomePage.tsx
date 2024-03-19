@@ -49,6 +49,7 @@ export const HomePage: FC = () => {
                 title=""
                 items={slides}
                 autoSlide
+                baseImageUrl=''
             />
             <div className="posts">
                 {items.map((item, index) => (

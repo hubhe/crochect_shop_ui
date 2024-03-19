@@ -2,11 +2,11 @@
     {
       "_id": "1",
       "name": "",
-      "imgUrl": "/imgs/post.png"
+      "imgUrl": "imgs/post.png"
     },
     {
       "_id": "2",
       "name": "",
-      "imgUrl": "/imgs/newdesigns.png"
+      "imgUrl": "imgs/newdesigns.png"
     }
   ]

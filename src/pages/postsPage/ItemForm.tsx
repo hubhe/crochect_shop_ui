@@ -109,6 +109,7 @@ export const ItemForm: FC<FormProps> = ({ type, onEdit, onSelectionChanged }) =>
                     isLoading={false}
                     randomColors
                     onClickItem={onClickItem}
+                    baseImageUrl='http://localhost:4000/public'
                 />
             </div>)}
         </div>
