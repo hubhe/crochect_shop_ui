@@ -33,7 +33,7 @@ export const ItemProfile: React.FC = () => {
               const fetchedItem = await ItemsService.getItemById(id!);
               setItem(fetchedItem.data);
               const fetchedComments = await CommentService.getCommentsByItem(id!);
-              setComments(fetchedComments.data);
+              setComments(fetchedComments);
               // Extract item IDs from fetched items
               const itemIds = fetchedItem._id;
           } catch (error) {

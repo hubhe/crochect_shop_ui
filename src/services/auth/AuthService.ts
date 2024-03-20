@@ -46,7 +46,7 @@ export async function login(email: string, password: string): Promise<any> {
 
 export async function updateUserProfile(_id: string, data: FormData): Promise<boolean> {
     try {
-        const response = await userFetch.put(`/user/${_id}`, data);
+        const response = await userFetch.put(`/user/${_id}`, data, {headers: {'Content-Type': 'multipart/form-data'}});
 
         const success = response.data.success;
 

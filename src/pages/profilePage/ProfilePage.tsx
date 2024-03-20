@@ -17,7 +17,7 @@ export const ProfilePage: FC = () => {
         try {
             if (user?._id)
                 await AuthService.updateUserProfile(user._id, formData);
-            // navigate('/');
+            navigate('/');
         } catch (e) {
             console.log('🚀 ~ file: loginPage.tsx:38 ~ onLogin ~ e', e);
         }

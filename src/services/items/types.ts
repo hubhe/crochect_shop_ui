@@ -1,8 +1,10 @@
+import { Comment } from '../comments/types'
+
 export interface BaseItem {
     _id: string;
     name: string;
     description: string;
-    comments: [];
+    comments: Comment[];
     imgUrl: string;
 }
 

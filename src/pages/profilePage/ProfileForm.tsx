@@ -41,10 +41,10 @@ export const ProfileForm: FC<FormProps> = ({ type, onUpdate }) => {
     useEffect(() => {
         if (email.length === 0 || name.length === 0) return setIsValid(false);
 
-        if (email === user?.email && name === user?.name)
-            return setIsValid(false);
+        if (email === user?.email && name === user?.name && !imageInfo)
+            return setIsValid(false); 
         return setIsValid(true);
-    }, [email, password, name]);
+    }, [email, password, name, imageInfo]);
     
     useEffect(() => {
         if (user){
