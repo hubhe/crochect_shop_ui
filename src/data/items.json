@@ -1,26 +1,60 @@
 [
     {
-      "id": 1,
-      "name": "Book",
-      "price": 10.99,
-      "imgUrl": "/imgs/book.jpg"
+      "_id": "1",
+      "name": "Rainbow Bunny",
+      "comments": ["hi", "hello", "wassup"],
+      "imgUrl": "/imgs/rosie.jpg",
+      "description": "Best product ever"
     },
     {
-      "id": 2,
-      "name": "Computer",
-      "price": 1199,
-      "imgUrl": "/imgs/computer.jpg"
+      "_id": "2",
+      "name": "Chick",
+      "comments": [],
+      "description": "Best product ever",
+      "imgUrl": "/imgs/chicks.jpg"
     },
     {
-      "id": 3,
-      "name": "Banana",
-      "price": 1.05,
-      "imgUrl": "/imgs/banana.jpg"
+      "_id": "3",
+      "name": "Mini Cow",
+      "comments": [],
+      "description": "Best product ever",
+      "imgUrl": "/imgs/mini-cow.jpg"
     },
     {
-      "id": 4,
-      "name": "Car",
-      "price": 14000,
-      "imgUrl": "/imgs/car.jpg"
+      "_id": "4",
+      "name": "Polar Bear",
+      "comments": [],
+      "imgUrl": "/imgs/polar-bears.jpg"
+    },
+    {
+      "_id": "5",
+      "name": "Succulent",
+      "comments": [],
+      "imgUrl": "/imgs/succulent.jpg"
+    },
+    {
+      "_id": "6",
+      "name": "Cactus",
+      "comments": [],
+      "imgUrl": "/imgs/cactus.jpg"
+    },
+    {
+      "_id": "7",
+      "name": "Perry the Platypus",
+      "price": 20,
+      "comments": [],
+      "imgUrl": "/imgs/perry.jpg"
+    },
+    {
+      "_id": "8",
+      "name": "Snake",
+      "comments": [],
+      "imgUrl": "/imgs/snake.jpg"
+    },
+    {
+      "_id": "9",
+      "name": "Cat",
+      "comments": [],
+      "imgUrl": "/imgs/cat.jpg"
     }
   ]

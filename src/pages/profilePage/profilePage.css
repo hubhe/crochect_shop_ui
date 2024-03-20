@@ -1,0 +1,45 @@
+.profile-page {
+    padding: 2vw 1.3vw 1vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.profile-card {
+    display: flex;
+    flex-direction: row;
+    min-width: 80%;
+    position: relative;
+}
+
+.profile-card .small-app-logo {
+    position: absolute;
+    top: 0.5em;
+    left: 0.5em;
+}
+
+.profile-card .right-side {
+    width: 65%;
+    display: flex;
+    position: relative;
+}
+
+.profile-card .right-side .profile-background-img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+.profile-card .right-side .app-logo {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 1.6em;
+}
+
+.profile-card .right-side .app-logo svg {
+    height: 2em;
+    width: 2em;
+}

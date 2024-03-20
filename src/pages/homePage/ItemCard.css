@@ -1,0 +1,17 @@
+.card {
+  /* width: calc(25% - 20px); 
+  margin: 10px;  */
+  flex: auto; /* Adjusted width for four items per row */
+  margin:auto;
+  max-width: 40%;
+}
+
+.card:hover {
+  transform: translateY(-1px);
+  background-color: rgba(160, 160, 183, 0.155);
+}
+
+.item-img {
+  width: 100%;
+  height: auto;
+}

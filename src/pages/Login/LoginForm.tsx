@@ -1,61 +1,75 @@
 import './LoginForm.css';
-
-import { FC, useState, useCallback, useEffect, useMemo } from 'react';
+import React, { FC, useState, useCallback, useEffect, useMemo, ChangeEvent } from 'react';
 import { Link } from 'react-router-dom';
 import SendIcon from '@mui/icons-material/Send';
 import LoadingButton from '@mui/lab/LoadingButton';
-import { CredentialResponse, GoogleLogin } from '@react-oauth/google'
-import { registerGoogle } from '../../providers/auth/serverAuth';
+import { CredentialResponse, GoogleLogin } from '@react-oauth/google';
+import { TextInput, PasswordInput, ImageInput } from '../../ui';
 
 
-import { TextInput, PasswordInput } from '../../ui';
 
 const MAX_PASSWORD_DIGITS = 8;
 
 export interface FormProps {
     type: 'Login' | 'Sign Up';
-    onLogin: (email: string, password: string, name: string) => Promise<void>;
+    onLogin: (formData: FormData) => Promise<void>;
+    onGoogleLogin?: (response: any) => Promise<void>; 
+
 }
 
-export const LoginForm: FC<FormProps> = ({ type, onLogin }) => {
+export const LoginForm: FC<FormProps> = ({ type, onLogin, onGoogleLogin }) => {
     const [name, setName] = useState<string>('');
     const [email, setEmail] = useState<string>('');
     const [confirmEmail, setConfirmEmail] = useState<string>('');
     const [password, setPassword] = useState<string>('');
     const [confirmPassword, setConfirmPassword] = useState<string>('');
+    const [imageInfo, setImageInfo] = useState<File | null>(null); // State for image URL
 
     const [isValid, setIsValid] = useState<boolean>(false);
     const [isLoading, setIsLoading] = useState<boolean>(false);
 
     const isLogin = useMemo(() => type === 'Login', [type]);
-
+    
     const handleLogin = useCallback(async () => {
         setIsLoading(true);
-        await onLogin(email, password, name);
+        const formData: FormData = new FormData()
+        formData.append('email', email);
+        formData.append('password', password);
+        formData.append('name', name);
+        if (imageInfo){
+            formData.append('image', imageInfo, imageInfo?.name);
+        }
+        await onLogin(formData); // Pass imageUrl to the onLogin function
         setIsLoading(false);
-    }, [isLogin, email, password, name]);
+    }, [email, password, name, imageInfo]); // Include imageUrl in the dependencies array
 
     useEffect(() => {
         if (email.length === 0 || password.length < MAX_PASSWORD_DIGITS) return setIsValid(false);
         if (type === 'Login') return setIsValid(true);
 
-        if (name.length === 0 || email != confirmEmail || password != confirmPassword)
+        if (name.length === 0 || email !== confirmEmail || password !== confirmPassword)
             return setIsValid(false);
         return setIsValid(true);
     }, [email, password, type, confirmEmail, confirmPassword, name]);
-    const onGoogleLoginSuccess = async (credentialResponse: CredentialResponse) => {
-        console.log(credentialResponse)
-        try {
-            const res = await registerGoogle(credentialResponse)
-            console.log(res)
-        } catch (e) {
-            console.log(e)
+
+
+    const onGoogleLoginSuccess = useCallback(async (response: CredentialResponse) => {
+        if (onGoogleLogin) {
+            setIsLoading(true);
+            try {
+                await onGoogleLogin(response);
+            } catch (error) {
+                console.error(error);
+            } finally {
+                setIsLoading(false);
+            }
         }
-    }
+    }, [onGoogleLogin]);
 
     const onGoogleLoginFailure = () => {
-        console.log("Google login failed")
-    }
+        console.log("Google login failed");
+    };
+
     return (
         <div className="login-form">
             <h2>{isLogin ? 'Welcome Back!' : 'Register'}</h2>
@@ -77,6 +91,9 @@ export const LoginForm: FC<FormProps> = ({ type, onLogin }) => {
                     value={confirmPassword}
                     onChange={setConfirmPassword}
                 />
+            )}
+            {!isLogin && (
+            <ImageInput onChange={setImageInfo} />
             )}
 
             {isLogin && (

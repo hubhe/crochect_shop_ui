@@ -8,13 +8,24 @@
     background-position: top;
     background-repeat: no-repeat;
     background-size: cover;
-    height: 84%;
+    height: 100%; 
 }
 
 .home-page .top-items-carousel .carousel {
     height: 35em;
 }
 
+.home-page .posts {
+  display: flex;
+  flex-wrap: wrap; /* Allow items to wrap to the next row */
+  justify-content: space-between; /* Distribute items evenly */
+  padding: 10px;
+}
+
+
+
+
 .home-page .main-title {
     font-size: 3em;
 }
+    

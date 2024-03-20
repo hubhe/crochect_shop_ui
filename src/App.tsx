@@ -1,28 +1,42 @@
-import { Container } from "react-bootstrap";
-import { Route, Routes } from "react-router-dom";
-import { Navbar } from "./components/Navbar";
-import { About } from "./pages/About";
-import LoginPage from "./pages/Login/LoginPage";
-import HomePage from "./pages/Home/HomePage";
-import SignUpPage from "./pages/SignUp/SignUpPage";
-import { Store } from "./pages/Store";
-import { ShoppingCartProvider } from "./context/ShoppingCartContext"
+import './App.css';
+import { GoogleOAuthProvider } from '@react-oauth/google'
 
-function App() {
-  return (
-    <ShoppingCartProvider>
-      <Navbar />
-      <Container className="mb-4">
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/Login" element={<LoginPage />} />
-          {/* <Route path="/SignUp" element={<SignUpPage />} /> */}
-          {/* <Route path="/store" element={<Store />} /> */}
-          {/* <Route path="/about" element={<About />} /> */}
-        </Routes>
-      </Container>
-      </ShoppingCartProvider>
-  );
+import { ThemeProvider, createTheme } from '@mui/material/styles';
+
+import { Router } from './Router';
+import { AuthContext } from './Contexts';
+import { Suspense, useEffect, useState } from 'react';
+import { AuthService } from './services';
+
+const lightTheme = createTheme({
+    palette: {
+        mode: 'light',
+    },
+});
+
+function App(): JSX.Element {
+    const [user, setUser] = useState<AuthService.User | null>(null)
+
+    const setActiveUser = async () => {
+        setUser(await AuthService.getActiveUser());
+    }
+
+    useEffect(() => {
+        // check for active user and setUser if needed
+        setActiveUser()
+    }, [])
+
+    return (
+        <div className="crochet-store-app">
+            <AuthContext.Provider value={{user, setUser}}>
+                <GoogleOAuthProvider clientId="21172355239-lnb2kj9grjiaiia0lg2oka2udhi24min.apps.googleusercontent.com">
+                <ThemeProvider theme={lightTheme}>
+                    <Router />
+                </ThemeProvider>
+                </GoogleOAuthProvider>
+            </AuthContext.Provider>
+        </div>
+    );
 }
 
 export default App;

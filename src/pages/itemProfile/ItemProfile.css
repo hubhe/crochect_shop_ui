@@ -1,0 +1,76 @@
+.item-card {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    min-width: 80%;
+    position: relative;
+}
+
+.item-info img {
+    object-fit: cover;
+    width: 100%; /* Set the width to 100% to fit its container */
+    max-width: 300px; /* Set a maximum width for the image */
+    height: auto; /* Maintain aspect ratio */
+}
+
+.buy-item-title {
+    text-align: center;
+    margin-left: auto;
+}
+
+.comment-content {
+    position: relative;
+}
+
+.user-name {
+    font-size: 12px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin: 4px;
+}
+
+.bottom-profile {
+    display: grid;
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+    gap: 1em;
+    padding: 0.5em;
+    align-items: start;
+    margin-top: auto;
+}
+
+.item-comments {
+    background-color: #ffa4db3d;
+    padding: 1em;
+}
+
+.comments {
+    margin-top: 1em;
+    font-size: 1.5em;
+}
+
+.comment-card {
+    margin-bottom: 1em;
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.comment-card-content {
+    text-align: center;
+}
+
+.new-comment-content {
+    margin: 1em;
+    width: 90%;
+}
+
+.submit-new-comment-btn {
+    margin-top: 1em;
+    background: #ec75a9;
+}
+
+.write-your-comment {
+    margin-bottom: 1em;
+}
+
